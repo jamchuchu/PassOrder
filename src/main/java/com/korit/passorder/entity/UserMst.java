@@ -19,7 +19,7 @@ public class UserMst {
     private String username;
     @NotBlank
     private String password;
-    @NotBlank
+
     private String repassword;
     @NotBlank
     private String name;

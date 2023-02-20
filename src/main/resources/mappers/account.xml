@@ -9,14 +9,13 @@
         <result property="userId" column="user_id"></result>
         <result property="username" column="username"></result>
         <result property="password" column="password"></result>
-        <result property="password" column="repassword"></result>
         <result property="name" column="name"></result>
         <result property="email" column="email"></result>
         <result property="roleId" column="role_id"></result>
         <result property="roleName" column="role_name"></result>
     </resultMap>
 
-    <insert id="registerUser" parameterType="com.korit.passorder.web.dto.UserDto">
+    <insert id="registerUser" parameterType="com.korit.passorder.entity.UserMst">
         insert into userMst
             values(0, #{username}, #{password}, #{name}, #{email}, #{roleId})
     </insert>
