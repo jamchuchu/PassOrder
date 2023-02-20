@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.passorder.respository.AccountRepository">
+
+    <resultMap id="userMst" type="com.korit.passorder.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="password" column="repassword"></result>
+        <result property="name" column="name"></result>
+        <result property="email" column="email"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+    </resultMap>
+
+    <insert id="registerUser" parameterType="com.korit.passorder.web.dto.UserDto">
+        insert into userMst
+            values(0, #{username}, #{password}, #{name}, #{email}, #{roleId})
+    </insert>
+
+    <select id="findUserIdByUsername" resultType="Integer">
+        select
+            user_id
+        from
+            userMst
+        where
+            username = #{username}
+    </select>
+
+    <select id="findUserByUserId" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+            um.role_id,
+
+            rm.role_name
+<!--        랭크 id 구현전 -->
+
+        from
+            userMst um
+            left outer join roleMst rm on(um.role_id = rm.role_id)
+        where
+            um.user_id = #{userId}
+    </select>
+</mapper>
