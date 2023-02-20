@@ -1,6 +1,8 @@
 package com.korit.passorder.config;
 
 
+import com.korit.passorder.security.PrincipalDetails;
+import com.korit.passorder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -44,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login") // 로그인 인증 post 요청
                 .defaultSuccessUrl("/success")
                 .failureUrl("/fail");
+
     }
 
 }

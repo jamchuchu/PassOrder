@@ -1,15 +1,9 @@
 window.onload = () => {
-    principalSerivce.getInstance().setWelcome();
+    
+    PrincipalService.getInstance().setWelcomeText();
 }
 
-const user = {
-    userId : 1,
-    username: "",
-    password: "",
-    name: "",
-    email: "",
-    roleId: 1,
-}
+
 
 class PrincipalApi {
     static #instance = null;
@@ -20,13 +14,13 @@ class PrincipalApi {
         return this.#instance;
     }
 
-    getName() {
-        const name = null;
+    getPrincipal() {
+        let responseData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/account/user/${userId}`,
+            url: "http://localhost:8000/api/login/user",
             dataType: "json",
             success: response => {
                 responseData = response.data;
@@ -42,19 +36,21 @@ class PrincipalApi {
 }
 
 
-
-class principalSerivce{
+class PrincipalService{
 
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new principalSerivce();
+            this.#instance = new PrincipalService();
         }
         return this.#instance;
     }
 
 
-    setWelcome(){
+    setWelcomeText(){
+
+        let user = PrincipalApi.getInstance().getPrincipal();
+
         const message = document.querySelector(".welcome");
         message.innerHTML = `${user.name}님<br>PASSORDER에 오신 걸 환영합니다.`;
 
