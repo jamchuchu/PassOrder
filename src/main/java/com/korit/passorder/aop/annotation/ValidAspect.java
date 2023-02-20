@@ -1,2 +1,10 @@
-package com.korit.passorder.aop.annotation;public class ValidAspect {
-}
+package com.korit.passorder.aop.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface ValidAspect {}

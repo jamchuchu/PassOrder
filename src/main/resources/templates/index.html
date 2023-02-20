@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>패스오더</title>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -13,16 +12,29 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/header.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
 </head>
 
 <body>
     <div id="container">
         <header class="header-container">
-            
+            <div class="sns-container">
+                <button class="sns-button" disabled>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+            </div>
+            <div class="logo-container">
+                <h1 class="brand-logo"><a href="">PASSORDER</a></h1>
+            </div>
+            <ul class="menu-container">
+                <li><a href="">카페메뉴</a></li>
+                <li><a href="">마이페이지</a></li>
+                <li><a href="">장바구니</a></li>
+            </ul>
         </header>
     
         
@@ -39,12 +51,12 @@
             </div>
 
             <aside class="main-account-container">
-                <form action="" method="">
+                <form action="/login" method="post">
                     <div class="login-container">
                         <h1 class="login-title">PASSORDER 로그인</h1>
                         <div class="login-group">
                             <label for="login-email"></label>
-                            <input type="email" id="login-email" class="login-inputs" name="username" placeholder="이메일을 입력해주세요" requried>
+                            <input type="text" id="login-email" class="login-inputs" name="username" placeholder="이메일을 입력해주세요" requried>
                         </div>
                         <div class="login-group">
                             <label for="login-password"></label>
@@ -66,9 +78,7 @@
                 </form>
             </aside>
         </main>
-    </div>
-    <script src="/static/js/component/header.js"></script>
-    <script src="/static/js/index.js"></script>
+    </div>    
 </body>
 
 </html>

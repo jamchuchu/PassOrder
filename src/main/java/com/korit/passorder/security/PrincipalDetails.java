@@ -1,8 +1,6 @@
 package com.korit.passorder.security;
 
-import com.korit.passorder.entity.RoleMst;
 import com.korit.passorder.entity.UserMst;
-import com.korit.passorder.service.RoleService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +23,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     private final UserMst user;
     private Map<String, Object> response;
 
-    @Autowired
-    RoleService roleService;
 
     //권한 들고오기
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        String roleName = roleService.getRoleName(user.getRoleId());
+        String roleName = user.getRoleName();
 
         GrantedAuthority role = new GrantedAuthority() {
             @Override
