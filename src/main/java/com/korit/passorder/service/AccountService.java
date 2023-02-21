@@ -1,28 +1,67 @@
 package com.korit.passorder.service;
 
+import com.korit.passorder.entity.CafeMst;
 import com.korit.passorder.entity.UserMst;
+import com.korit.passorder.exception.CustomValidationException;
 import com.korit.passorder.respository.AccountRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
 @Service
 public class AccountService {
+
     @Autowired
     AccountRepository accountRepository;
 
-    public int registerUser(UserMst userMst){
+    public UserMst registerUser(UserMst userMst) {
         userMst.setPassword(new BCryptPasswordEncoder().encode(userMst.getPassword()));
-        System.out.println(userMst);
-        return accountRepository.registerUser(userMst);
+        accountRepository.saveUser(userMst);
+//        accountRepository.saveUserRole(userMst);
+        return userMst;
     }
 
-    public int findUserByUsername(String username){
-        return accountRepository.findUserIdByUsername(username);
+    public CafeMst registerAdminAddCafe(CafeMst cafeMst) {
+
+        accountRepository.saveAdminCafeInfo(cafeMst);
+        return cafeMst;
     }
 
-    public UserMst findUserByuserId(int userId){
+    public void duplicateUsername(String username) {
+        UserMst user = accountRepository.findUserByUsername(username);
+//        System.out.println(user.toString());
+
+        if(user != null) {
+            Map<String, String> errorMap = new HashMap<>();
+            errorMap.put("username", "이미 존재하는 계정 이메일입니다.");
+
+            throw new CustomValidationException(errorMap);
+        }
+    }
+
+    public void compareToPassword(String password, String repassword) {
+        if(!password.equals(repassword)) {
+            Map<String, String> errorMap = new HashMap<>();
+            errorMap.put("repassword", "비밀번호가 일치하지 않습니다.");
+
+            throw new CustomValidationException(errorMap);
+        }
+    }
+
+
+    public UserMst findUserByUserId(int userId){
         return accountRepository.findUserByUserId(userId);
     }
+    public UserMst findUserByUsername(String username){
+        System.out.println(username);
+        return accountRepository.findUserByUsername(username);
+    }
+
+
 
 }

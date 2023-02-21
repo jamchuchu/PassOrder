@@ -3,10 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
 body {
-    background-image: url(/images/main-image3.jpg);
+    background-image: url(/static/images/main-image3.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -14,7 +15,7 @@ body {
     height: 100%;
 }
 
-.header-container {
+/* .header-container {
     position: fixed;
     top: 0;
     display: flex;
@@ -107,7 +108,7 @@ body {
 
 .menu-container li a:hover {
     text-shadow: 0px 0px 15px #141414;
-}
+} */
 
 .main-title-container {
     position: absolute;
@@ -200,7 +201,7 @@ body {
     width: 450px;
     height: 420px;
   
-    background-color: rgb(255,  255, 255, 0.7);
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .login-title {

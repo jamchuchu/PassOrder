@@ -1,5 +1,6 @@
 package com.korit.passorder.aop;
 
+
 import com.korit.passorder.exception.CustomValidationException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -43,5 +44,4 @@ public class ValidationAop {
 
         return proceedingJoinPoint.proceed();
     }
-
 }

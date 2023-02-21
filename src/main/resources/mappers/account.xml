@@ -1,50 +1,58 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.passorder.respository.account.AccountRepository">
 
-<mapper namespace="com.korit.passorder.respository.AccountRepository">
 
-    <resultMap id="userMst" type="com.korit.passorder.entity.UserMst">
-        <result property="userId" column="user_id"></result>
-        <result property="username" column="username"></result>
-        <result property="password" column="password"></result>
-        <result property="name" column="name"></result>
-        <result property="email" column="email"></result>
-        <result property="roleId" column="role_id"></result>
-        <result property="roleName" column="role_name"></result>
-    </resultMap>
-
-    <insert id="registerUser" parameterType="com.korit.passorder.entity.UserMst">
-        insert into userMst
-            values(0, #{username}, #{password}, #{name}, #{email}, #{roleId})
-    </insert>
-
-    <select id="findUserIdByUsername" resultType="Integer">
-        select
-            user_id
-        from
-            userMst
-        where
-            username = #{username}
-    </select>
-
-    <select id="findUserByUserId" resultMap="userMst">
+    <select id="findUserByUsername" parameterType="String" resultType="com.korit.passorder.entity.UserMst">
         select
             um.user_id,
             um.username,
             um.password,
             um.name,
             um.email,
-            um.role_id,
 
+            rm.role_id,
             rm.role_name
-<!--        랭크 id 구현전 -->
-
         from
             userMst um
-            left outer join roleMst rm on(um.role_id = rm.role_id)
+            left outer join roleMst rm on(rm.role_id = um.role_id)
+        where
+            um.username = #{username}
+    </select>
+
+    <select id="findUserByUserId" parameterType="Integer" resultType="com.korit.passorder.entity.UserMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+
+            rm.role_id,
+            rm.role_name
+        from
+            userMst um
+            left outer join roleMst rm on(rm.role_id = um.role_id)
         where
             um.user_id = #{userId}
     </select>
+
+    <insert id="saveUser"
+            parameterType="com.korit.passorder.entity.UserMst"
+            useGeneratedKeys="true"
+            keyProperty="userId">
+        insert into userMst
+        values (0, #{username}, #{password}, #{name}, #{email}, #{roleId})
+    </insert>
+
+    <insert id="saveAdminCafeInfo"
+            parameterType="com.korit.passorder.entity.CafeMst"
+            useGeneratedKeys="true"
+            keyProperty="cafeId">
+        insert into cafeMst
+        values (0, #{cafeName}, #{address}, #{phone}, #{userId})
+    </insert>
+
 </mapper>

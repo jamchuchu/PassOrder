@@ -1,7 +1,7 @@
 
 /* <!-- main menu --> */
 .main-container{
-    margin-top: 100px;
+    margin-top: 300px;
 }
 .category-button-group{
     padding-bottom: 10px;
@@ -21,6 +21,7 @@
 }
 .main-menu-content{
     padding-left: 5vw;
+    padding-right: 5vw;
     margin-bottom: 15%;
 
     display: flex;    
@@ -30,6 +31,7 @@
 .main-menu-content ul{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .main-menu-drink-box{
     display: flex;

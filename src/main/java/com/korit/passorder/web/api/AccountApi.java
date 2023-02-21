@@ -1,7 +1,7 @@
-package com.korit.passorder.web.api;
+package com.korit.passorder.web.api.account;
 
 import com.korit.passorder.aop.annotation.ValidAspect;
-import com.korit.passorder.config.SecurityConfig;
+import com.korit.passorder.entity.CafeMst;
 import com.korit.passorder.entity.UserMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.AccountService;
@@ -10,47 +10,66 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api/account")
 public class AccountApi {
 
     @Autowired
-    AccountService accountService;
-
+    private AccountService accountService;
 
     @ValidAspect
     @PostMapping("/register")
-    public ResponseEntity<CMRespDto<UserMst>> register(@Valid @RequestBody UserMst userMst, BindingResult bindingResult) {
-        accountService.registerUser(userMst);
+    public ResponseEntity<?> register(@RequestBody @Valid UserMst userMst, BindingResult bindingResult) {
+
+        accountService.duplicateUsername(userMst.getUsername());
+        accountService.compareToPassword(userMst.getPassword(), userMst.getRepassword());
+
+        UserMst user = accountService.registerUser(userMst);
+
         return ResponseEntity
-                .created(null)
-                .body(new CMRespDto<>(HttpStatus.CREATED.value(), "create user", userMst));
+                .created(URI.create("/api/account/user/" + user.getUserId()))
+                .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new User", user));
+    }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<?> registerAdminCafe(@RequestBody CafeMst cafeMst, BindingResult bindingResult) {
+
+//        accountService.registerAdminAddCafe(userMst.getUserId(), cafeMst.getCafeId());
+
+
+        System.out.println(cafeMst);
+
+        CafeMst cafe = accountService.registerAdminAddCafe(cafeMst);
+
+        return ResponseEntity
+                .created(URI.create("/api/account/user/" + cafe.getCafeId()))
+                .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new User", cafe));
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUser(@PathVariable int userId){
-        UserMst userMst = accountService.findUserByuserId(userId);
+        UserMst userMst = accountService.findUserByUserId(userId);
         return ResponseEntity
                 .created(null)
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "success", userMst));
     }
 
-    @GetMapping("/user")
+    @GetMapping("/principal")
     public ResponseEntity<?> getUserbyPrincipalDetails(@AuthenticationPrincipal PrincipalDetails principalDetails){
         UserMst userMst = principalDetails.getUser();
         return ResponseEntity
                 .created(null)
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "success", userMst));
     }
+
+
+
 
 
 }

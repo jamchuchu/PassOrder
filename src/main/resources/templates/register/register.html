@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스오더</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/register/register.css" />
+</head>
+
+<body>
+    <div id="container">
+      <header class="header-container">
+        <div class="sns-container">
+          <button class="sns-button" disabled>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-facebook"></i>
+          </button>
+        </div>
+        <div class="logo-container">
+            <h1 class="brand-logo"><a href="/index">PASSORDER</a></h1>
+        </div>
+        <ul class="menu-container">
+            <li><a href="">카페메뉴</a></li>
+            <li><a href="">마이페이지</a></li>
+            <li><a href="">장바구니</a></li>
+        </ul>
+      </header>
+        
+        <main class="main-container">
+          <div class="sub-img-area">
+            <div class="register-title-group">
+                <h1 class="register-main-title">회 원 가 입</h1>
+                <p class="register-sub-title">Join Us, PASSORDER</p>
+                <p class="reigster-txt">PASSORDER 가입을 위한 약관 동의 및 본인 인증 단계 입니다.</p>
+            </div>
+          </div>
+
+          <div class ="register-bigbox">
+            <div class="register-selectbox">
+              <button type="button" id="role-user-id" value="0" name="roleId" class="register-select-group user-button">회 원</button>
+              <button type="button" id="role-admin-id" value="0" name="roleId" class="register-select-group admin-button">사업자</button>
+            </div>
+
+            <div class="register-container">
+              
+            </div>  
+          </div>
+        </main>
+    </div>
+    <script src="/static/js/component/header.js"></script>
+    <script src="/static/js/register.js"></script>
+</body>
+
+</html>

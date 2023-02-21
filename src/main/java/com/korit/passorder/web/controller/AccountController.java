@@ -2,36 +2,31 @@ package com.korit.passorder.web.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/account")
 public class AccountController {
 
-    @GetMapping("/login")
+    @GetMapping("/index")
     public String login(){
-        return "index";
-
+        return "/index/index";
     }
 
-    @ResponseBody
+    @GetMapping("/before-register")
+    public String beforeRegister() {
+        return "/register/beforeRegister";
+    }
+
     @GetMapping("/register")
     public String register(){
-        return "register";
+        return "/register/register";
     }
 
-    @GetMapping("/success")
-    public String success(){
-        return "indexSuccess";
-    }
 
-    @ResponseBody
-    @GetMapping("/fail")
-    public String fail(){
-        return "fail";
-    }
+
+
+
 
 
 }
