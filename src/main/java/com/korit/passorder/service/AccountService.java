@@ -57,6 +57,7 @@ public class AccountService {
     public UserMst findUserByUserId(int userId){
         return accountRepository.findUserByUserId(userId);
     }
+
     public UserMst findUserByUsername(String username){
         System.out.println(username);
         return accountRepository.findUserByUsername(username);
