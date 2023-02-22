@@ -1,4 +1,4 @@
-package com.korit.passorder.web.api.account;
+package com.korit.passorder.web.api;
 
 import com.korit.passorder.aop.annotation.ValidAspect;
 import com.korit.passorder.entity.CafeMst;
@@ -23,6 +23,8 @@ public class AccountApi {
     @Autowired
     private AccountService accountService;
 
+
+
     @ValidAspect
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid UserMst userMst, BindingResult bindingResult) {
@@ -37,7 +39,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new User", user));
     }
 
-    @PostMapping("/register/admin")
+    @PostMapping("/register/cafe")
     public ResponseEntity<?> registerAdminCafe(@RequestBody CafeMst cafeMst, BindingResult bindingResult) {
 
 //        accountService.registerAdminAddCafe(userMst.getUserId(), cafeMst.getCafeId());
@@ -63,6 +65,15 @@ public class AccountApi {
     @GetMapping("/principal")
     public ResponseEntity<?> getUserbyPrincipalDetails(@AuthenticationPrincipal PrincipalDetails principalDetails){
         UserMst userMst = principalDetails.getUser();
+
+        return ResponseEntity
+                .created(null)
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "success", userMst));
+    }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username){
+        UserMst userMst = accountService.findUserByUsername(username);
         return ResponseEntity
                 .created(null)
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "success", userMst));

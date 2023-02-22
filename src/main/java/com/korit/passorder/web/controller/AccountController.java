@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/account")
 public class AccountController {
 
-    @GetMapping("/index")
+    @GetMapping({"", "/index"})
     public String login(){
         return "/index/index";
     }
@@ -22,11 +22,5 @@ public class AccountController {
     public String register(){
         return "/register/register";
     }
-
-
-
-
-
-
 
 }
