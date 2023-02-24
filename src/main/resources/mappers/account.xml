@@ -3,26 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.korit.passorder.respository.AccountRepository">
+    <resultMap id="userMst" type="com.korit.passorder.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="email" column="email"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+        <collection property="roleMst" resultMap="roleMst"></collection>
+    </resultMap>
 
+    <resultMap id="roleMst" type="com.korit.passorder.entity.RoleMst">
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+    </resultMap>
 
-    <select id="findUserByUsername" parameterType="String" resultType="com.korit.passorder.entity.UserMst">
-        select
-            um.user_id,
-            um.username,
-            um.password,
-            um.name,
-            um.email,
-
-            rm.role_id,
-            rm.role_name
-        from
-            userMst um
-            left outer join roleMst rm on(rm.role_id = um.role_id)
-        where
-            um.username = #{username}
-    </select>
-
-    <select id="findUserByUserId" parameterType="Integer" resultType="com.korit.passorder.entity.UserMst">
+    <select id="findUserByUserId" parameterType="Integer" resultMap="userMst">
         select
             um.user_id,
             um.username,
@@ -37,6 +34,24 @@
             left outer join roleMst rm on(rm.role_id = um.role_id)
         where
             um.user_id = #{userId}
+    </select>
+
+
+    <select id="findUserByUsername" parameterType="String" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+
+            rm.role_id,
+            rm.role_name
+        from
+            userMst um
+            left outer join roleMst rm on(rm.role_id = um.role_id)
+        where
+            um.username = #{username}
     </select>
 
     <insert id="saveUser"
@@ -54,5 +69,6 @@
         insert into cafeMst(cafe_id, cafe_name, address, phone, user_id)
         values (0, #{cafeName}, #{address}, #{phone}, #{userId})
     </insert>
+
 
 </mapper>

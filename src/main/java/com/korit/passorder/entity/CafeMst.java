@@ -16,9 +16,13 @@ public class CafeMst {
 
     private int cafeId;
 
+    @NotBlank
     private String cafeName;
+
+    @NotBlank
     private String address;
 
+    @NotBlank
     private String phone;
 
     private LocalDateTime openTime;

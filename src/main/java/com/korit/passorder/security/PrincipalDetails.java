@@ -31,6 +31,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
         String roleName = user.getRoleName();
+        System.out.println("롤 네임: " + roleName);
 
         GrantedAuthority role = new GrantedAuthority() {
             @Override
@@ -40,6 +41,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         };
 
         authorities.add(role);
+
 
         return authorities;
     }
