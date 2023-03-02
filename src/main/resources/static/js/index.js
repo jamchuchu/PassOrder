@@ -1,6 +1,6 @@
 window.onload = () => {
     indexEvent.getInstance().addLogoButtonOnclicEvent();
-    indexEvent.getInstance().addCenterButtonOnclickEvent();
+    indexEvent.getInstance().addForIndexCenterButtonOnclickEvent();
     indexEvent.getInstance().addMenuContainerNavButtonOnclickEvent();
 }
 
@@ -22,8 +22,8 @@ class indexEvent {
         }
     }
 
-    addCenterButtonOnclickEvent() {
-        const menuButton = document.querySelector('.menu-button');
+    addForIndexCenterButtonOnclickEvent() {
+        const menuButton = document.querySelector('.index-menu-button');
 
         menuButton.onclick = () => {
             location.href = '/menu/user';

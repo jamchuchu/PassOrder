@@ -70,5 +70,14 @@
         values (0, #{cafeName}, #{address}, #{phone}, #{userId})
     </insert>
 
+    <update id="modifyUserPassword"
+            parameterType="com.korit.passorder.entity.UserMst">
+        update userMst
+        set
+            password = #{password}
+        where
+            username = #{username}
+    </update>
+
 
 </mapper>

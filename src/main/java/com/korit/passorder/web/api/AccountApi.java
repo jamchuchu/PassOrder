@@ -1,5 +1,6 @@
 package com.korit.passorder.web.api;
 
+import com.korit.passorder.aop.annotation.ParamsAspect;
 import com.korit.passorder.aop.annotation.ValidAspect;
 import com.korit.passorder.entity.CafeMst;
 import com.korit.passorder.entity.UserMst;
@@ -43,6 +44,17 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new User", user));
     }
 
+    @ParamsAspect
+    @PatchMapping("/modify-password")
+    public ResponseEntity<CMRespDto<?>>modifyPassword(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody UserMst userMst) {
+        userMst.setUsername(principalDetails.getUsername());
+        accountService.modifyUser(userMst);
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Modify password successfully", true));
+    }
+
     @ValidAspect
     @PostMapping("/register/cafe")
     public ResponseEntity<? extends CMRespDto<? extends CafeMst>> registerAdminCafe(@RequestBody @Valid CafeMst cafeMst, BindingResult bindingResult) {
@@ -58,6 +70,8 @@ public class AccountApi {
                 .created(URI.create("/api/account/user/" + cafe.getCafeId()))
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new Cafe", cafe));
     }
+
+
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "사용자 식별 코드", required = true, dataType = "int"),

@@ -147,7 +147,7 @@ body {
     width: 100%;
 }
 
-.main-menu-button {
+.main-index-menu-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +155,7 @@ body {
     height: 420px;
 }
 
-.menu-button {
+.index-menu-button {
     width: 200px;
     height: 40px;
     background-color: rgba(2, 2, 2, 0.5);

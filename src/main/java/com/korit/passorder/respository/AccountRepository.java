@@ -16,4 +16,7 @@ public interface AccountRepository {
 
 
     public int saveAdminCafeInfo(CafeMst cafe);
+
+    public int modifyUserPassword(UserMst user);
+
 }

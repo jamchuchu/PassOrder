@@ -5,6 +5,7 @@ import com.korit.passorder.entity.UserMst;
 import com.korit.passorder.exception.CustomValidationException;
 import com.korit.passorder.respository.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class AccountService {
         accountRepository.saveUser(userMst);
 //        accountRepository.saveUserRole(userMst);
         return userMst;
+    }
+
+    public void modifyUser(UserMst userMst) {
+        userMst.setPassword(new BCryptPasswordEncoder().encode(userMst.getPassword()));
+        accountRepository.modifyUserPassword(userMst);
     }
 
 

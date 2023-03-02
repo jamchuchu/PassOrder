@@ -17,4 +17,9 @@ public class MypageController {
     public String mypageAdmin() {
         return "mypage/adminMypage";
     }
+
+    @GetMapping("/user-modify")
+    public String modifyUser() {
+        return "modify/userModify";
+    }
 }
