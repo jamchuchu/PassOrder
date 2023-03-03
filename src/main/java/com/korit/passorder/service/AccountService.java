@@ -5,6 +5,7 @@ import com.korit.passorder.entity.UserMst;
 import com.korit.passorder.exception.CustomValidationException;
 import com.korit.passorder.respository.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,12 @@ public class AccountService {
         return userMst;
     }
 
+    public void modifyUser(UserMst userMst) {
+        userMst.setPassword(new BCryptPasswordEncoder().encode(userMst.getPassword()));
+        accountRepository.modifyUserPassword(userMst);
+    }
+
+
     public CafeMst registerAdminAddCafe(CafeMst cafeMst) {
 
         accountRepository.saveAdminCafeInfo(cafeMst);
@@ -38,7 +45,7 @@ public class AccountService {
 
         if(user != null) {
             Map<String, String> errorMap = new HashMap<>();
-            errorMap.put("username", "이미 존재하는 계정 이메일입니다.");
+            errorMap.put("username", "이미 존재하는 아이디입니다.");
 
             throw new CustomValidationException(errorMap);
         }
@@ -53,15 +60,19 @@ public class AccountService {
         }
     }
 
+    public UserMst getUser(int userId) {
+        System.out.println(userId);
+        log.info("{}", userId);
 
-    public UserMst findUserByUserId(int userId){
         return accountRepository.findUserByUserId(userId);
     }
+
 
     public UserMst findUserByUsername(String username){
         System.out.println(username);
         return accountRepository.findUserByUsername(username);
     }
+
 
 
 
