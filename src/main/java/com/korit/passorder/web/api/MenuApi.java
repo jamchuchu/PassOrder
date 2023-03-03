@@ -43,7 +43,7 @@ public class MenuApi {
 
     @PutMapping("")
     public void modifyMenu(@RequestBody MenuMst modifiedMenu, @AuthenticationPrincipal PrincipalDetails principal){
-        prin
+
     };
 
 
