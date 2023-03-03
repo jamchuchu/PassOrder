@@ -5,23 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
-public class OrderMst {
-
-    private int orderId;
-
-    private int cafeId;
+public class CouponMst {
+    private int couponId;
 
     private int userId;
 
-    private LocalDateTime orderTime;
+    private int cafeId;
 
-    private int totalPrice;
-
-    private int complete;
+    private int couponCount;
 }

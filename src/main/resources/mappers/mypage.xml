@@ -3,6 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.korit.passorder.respository.MypageRepository">
-    
+
+    <select id="selectTotalPrice"
+            resultType="Integer"
+            parameterType="com.korit.passorder.entity.OrderMst">
+        select sum(total_price) as totalPrice
+            from orderMst
+        where user_id = #{userId} and cafe_Id = #{cafeId} and complete = 1
+    </select>
+
+    <update id="couponCountUpdate"
+            parameterType="com.korit.passorder.entity.CouponMst">
+        update couponMst
+        set
+            coupon_count = #{couponCount}
+        where
+            user_id = #{userId} and cafe_id = #{cafeId}
+    </update>
+
+    <update id="completeStatus">
+        update orderMst
+        set
+            complete = 1
+        where order_id = {orderId};
+    </update>
 
 </mapper>
