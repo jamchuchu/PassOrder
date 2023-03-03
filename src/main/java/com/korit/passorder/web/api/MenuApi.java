@@ -4,6 +4,7 @@ import com.korit.passorder.entity.MenuMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.MenuService;
 import com.korit.passorder.web.dto.CMRespDto;
+import com.korit.passorder.web.dto.MenuReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,31 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/menu")
+@RestController
+@RequestMapping("/api/menu")
 public class MenuApi {
     @Autowired
     MenuService menuService;
 
     @PostMapping()
-    public ResponseEntity<?> createMenu(@RequestBody MenuMst menuMst){
-        menuService.createMenu(menuMst);
-        return  ResponseEntity.created(null).body(new CMRespDto<>(HttpStatus.CREATED.value(), "ok", menuMst));
+    public ResponseEntity<?> createMenu(@RequestBody MenuReqDto menuReqDto){
+        System.out.println(menuReqDto.toString());
+//        int userId = principal.getUser().getUserId();
+//        menuReqDto.setCafeId(cafeService.getCafeIdByUserId(userId));
+//        int cafeId = 26; // 임시 카페 id
+//        MenuMst menuMst = MenuMst.builder()
+//                        .cafeId(cafeId)
+//                        .menuName(menuReqDto.getMenuName())
+//                        .category(menuReqDto.getCategory())
+//                        .menuPrice(menuReqDto.getMenuPrice())
+//                .build();
+//        menuService.createMenu(menuMst);
+//
+//        List<MenuDtl> menuDtl = menuReqDto.getMenuDtl();
+//        for(MenuDtl dtl : menuDtl){
+//            menuService.createAddMenu(dtl);
+//        }
+        return  ResponseEntity.created(null).body(new CMRespDto<>(HttpStatus.CREATED.value(), "ok", menuReqDto));
     }
 
     @GetMapping("/{menuId}")
@@ -41,10 +58,7 @@ public class MenuApi {
         return menuService.getMenuByCafeId(cafeId);
     }
 
-    @PutMapping("")
-    public void modifyMenu(@RequestBody MenuMst modifiedMenu, @AuthenticationPrincipal PrincipalDetails principal){
 
-    };
 
 
 }

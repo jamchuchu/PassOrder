@@ -29,7 +29,5 @@ public class MenuService {
         return menuRepository.getMenuByCafeId(cafeId);
     };
 
-    public int modifyMenu(MenuMst modifiedMenu){
-        return menuRepository.modifyMenu(modifiedMenu);
-    };
+
 }
