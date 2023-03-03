@@ -68,4 +68,12 @@ public class AccountService {
     }
 
 
+    public UserMst findUserByUsername(String username){
+        System.out.println(username);
+        return accountRepository.findUserByUsername(username);
+    }
+
+
+
+
 }
