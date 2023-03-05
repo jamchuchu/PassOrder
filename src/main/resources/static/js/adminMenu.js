@@ -2,19 +2,19 @@ window.onload = () => {
 
 
     alert("ok");
-    RegisterEvent.getInstance().addMenusSaveOnclickEvent();
-    RegisterEvent.getInstance().addClickNoneEvent();
-    RegisterEvent.getInstance().addClickcloseEvent();
+    AdminMenuEvent.getInstance().addMenusSaveOnclickEvent();
+    AdminMenuEvent.getInstance().addClickNoneEvent();
+    AdminMenuEvent.getInstance().addClickcloseEvent();
 
 
-    Service.getInstance().viewCategory();
+    AdminMenuService.getInstance().viewCategory();
 }
 
-class RegisterApi {
+class AdminMenuApi {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new RegisterApi();
+            this.#instance = new AdminMenuApi();
         }
 
         return this.#instance;
@@ -56,7 +56,6 @@ class RegisterApi {
             },
             error: error => {
                 console.log(error);
-                RegisterService.getInstance().setErrorMessage(error.responseJSON.data);
             }
         });
         return responseData;
@@ -65,11 +64,11 @@ class RegisterApi {
 
 
 //errors
-class Service {
+class AdminMenuService {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new Service();
+            this.#instance = new AdminMenuService();
         }
 
         return this.#instance;
@@ -79,23 +78,21 @@ class Service {
         const categoryBox = document.querySelector(".quick-group");
         categoryBox.innerHTML = `<button type="button" class="left-button">전체메뉴</button>` ;
 
-        // const category = RegisterApi.getInstance().getcagetory();
-
-        // for(const i=0; i<category.length; i++){
-        //     const str = category[i];
-        //     categoryBox.innerHTML += `<button type="button" class="left-button" value ="${str}">${str}</button>` ;
-        // }
+        const categories = AdminMenuApi.getInstance().getcagetory();
+        categories.data.forEach((category) => {
+          categoryBox.innerHTML += `<button type="button" class="left-button" >${category}</button>`;
+        });
 
     }
 
 }
 
 
-class RegisterEvent {
+class AdminMenuEvent {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new RegisterEvent();
+            this.#instance = new AdminMenuEvent();
         }
 
         return this.#instance;
@@ -120,7 +117,7 @@ class RegisterEvent {
             let menu = null;
 
             menu = new Menu(category, menuName, menuPrice, hotAndice, shotStatus, whipStatus, hotAndicePrice, shotPrice, whipPrice);
-            RegisterApi.getInstance().registerMenu(menu);
+            AdminMenuApi.getInstance().registerMenu(menu);
         }
 
     }
