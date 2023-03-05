@@ -90,6 +90,14 @@ public class MenuApi {
         List<String> category = menuService.getCategoriesByCafeId(cafeId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
     }
+
+    @GetMapping("/user/menuname")
+    public ResponseEntity<?> getMenuByCafeId(@RequestParam String menuName){
+        System.out.println(menuName);
+        int cafeId = 26;
+        MenuMst menuMst = menuService.getMenuIdByMenuName(cafeId, menuName);
+        return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
+    }
 //    @GetMapping("/{cafeId}")
 //    public ResponseEntity<?> getMenuByCafeId(@PathVariable int cafeId){
 //        return menuService.getMenuByCafeId(cafeId);

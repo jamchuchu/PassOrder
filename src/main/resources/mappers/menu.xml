@@ -16,7 +16,7 @@
             cafe_id as cafeId,
             menu_name as menuName,
             category,
-            menu_price as menuPrice,
+            menu_price as menuPrice
         from
             menuMst
         where
@@ -29,7 +29,7 @@
             cafe_id as cafeId,
             menu_name as menuName,
             category,
-            menu_price as menuPrice,
+            menu_price as menuPrice
         from
             menuMst
         where
@@ -42,7 +42,7 @@
             cafe_id as cafeId,
             menu_name as menuName,
             category,
-            menu_price as menuPrice,
+            menu_price as menuPrice
         from
             menuMst
         where
@@ -60,6 +60,21 @@
         group by
             category
     </select>
+
+
+    <select id="getMenuIdByMenuName" resultType="com.korit.passorder.entity.MenuMst">
+        select
+            menu_id as menuId,
+            cafe_id as cafeId,
+            menu_name as menuName,
+            category,
+            menu_price as menuPrice
+        from
+            menuMst
+        where
+            cafe_id = #{cafeId} and menu_name = #{menuName}
+    </select>
+
 <!--    <update id="modifyMenu" parameterType="com.korit.passorder.entity.MenuMst">-->
 <!--        update-->
 <!--            menuMst-->

@@ -22,17 +22,19 @@ public class MenuService {
     public MenuMst getMenuByMenuId(int menuId){
         return menuRepository.getMenuByMenuId(menuId);
     };
-
     public List<MenuMst> getMenuByCategory(String category){
         return menuRepository.getMenuByCategory(category);
     };
     public List<MenuMst> getMenuByCafeId(int cafeId){
         return menuRepository.getMenuByCafeId(cafeId);
     };
-
     public List<String> getCategoriesByCafeId(int cafeId){
         return menuRepository.getCategoriesByCafeId(cafeId);
     }
+    public MenuMst getMenuIdByMenuName(int cafeId, String menuName){
+        return menuRepository.getMenuIdByMenuName(cafeId, menuName);
+    }
+
 
     //menudtl 추가
     public void createMenuDtls(List<MenuDtl> menuDtlList){

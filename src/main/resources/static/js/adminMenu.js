@@ -179,7 +179,7 @@ class Menu {
     menuName = null;
     menuPrice = null;
     hotAndice = null;
-    shotStat0us = null;
+    shotStatus = null;
     whipStatus = null;
     hotAndicePrice = null;
     shotPrice = null;

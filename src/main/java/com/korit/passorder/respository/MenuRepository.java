@@ -13,6 +13,7 @@ public interface MenuRepository {
     public List<MenuMst> getMenuByCategory(String category);
     public List<MenuMst> getMenuByCafeId(int cafeId);
     public List<String> getCategoriesByCafeId(int cafeId);
+    public MenuMst getMenuIdByMenuName(int cafeId, String menuName);
 
         public int createMenuDtl(MenuDtl menuDtl);
 
