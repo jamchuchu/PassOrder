@@ -1,5 +1,6 @@
 package com.korit.passorder.respository;
 
+import com.korit.passorder.entity.MenuDtl;
 import com.korit.passorder.entity.MenuMst;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +12,9 @@ public interface MenuRepository {
     public MenuMst getMenuByMenuId(int menuId);
     public List<MenuMst> getMenuByCategory(String category);
     public List<MenuMst> getMenuByCafeId(int cafeId);
+    public List<String> getCategoriesByCafeId(int cafeId);
+
+        public int createMenuDtl(MenuDtl menuDtl);
 
 
 

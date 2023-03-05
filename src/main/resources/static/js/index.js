@@ -1,4 +1,5 @@
 window.onload = () => {
+0
     indexEvent.getInstance().addLogoButtonOnclicEvent();
     indexEvent.getInstance().addForIndexCenterButtonOnclickEvent();
     indexEvent.getInstance().addMenuContainerNavButtonOnclickEvent();

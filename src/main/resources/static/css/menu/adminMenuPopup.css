@@ -136,14 +136,39 @@
   height: 470px;
 }
 
+
+.menu-category-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 50px;
+
+}
+
 .menu-name-box {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 
   width: 400px;
-  height: 100px;
+  height: 50px;
+
 }
+
+.menu-price-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 50px;
+
+  margin-bottom: 20px;
+
+}
+
 
 .menu-option-box {
   display: flex;
@@ -174,6 +199,11 @@
 }
 
 .menu-name-box input {
+  width: 272px;
+  height: 40px;
+}
+
+.menu-price-box input {
   width: 272px;
   height: 40px;
 }
@@ -269,6 +299,9 @@ input[type=radio]:checked + .whip-button {
 .menu-status-input {
   text-align: end;
 }
+
+
+
 
 .menu-input-area {
   display: flex;

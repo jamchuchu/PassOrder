@@ -5,9 +5,9 @@
 <mapper namespace="com.korit.passorder.respository.MenuRepository">
 
 
-    <insert id="createMenu" parameterType="com.korit.passorder.entity.MenuMst">
+    <insert id="createMenu" parameterType="com.korit.passorder.entity.MenuMst" useGeneratedKeys="true" keyProperty="menuId">
         insert into menuMst
-        values (0, #{cafeId}, #{menuName}, #{category}, #{menuPrice}, #{addMenu})
+        values (#{menuId}, #{cafeId}, #{menuName}, #{category}, #{menuPrice})
     </insert>
 
     <select id="getMenuByMenuId" resultType="com.korit.passorder.entity.MenuMst">
@@ -49,6 +49,17 @@
             cafe_id = #{cafeId}
     </select>
 
+
+    <select id="getCategoriesByCafeId" resultType="String">
+        select
+            category
+        from
+            menuMst
+        where
+            cafe_id = #{cafeId} and category is not null
+        group by
+            category
+    </select>
 <!--    <update id="modifyMenu" parameterType="com.korit.passorder.entity.MenuMst">-->
 <!--        update-->
 <!--            menuMst-->
@@ -65,19 +76,21 @@
 <!--    menuDtl-->
     <select id="getAddMenu" resultType="com.korit.passorder.entity.MenuDtl">
         select
-            dtl.menu_dtl_id as menuDtlId,
-            nameDtl.add_menu_name as addMenuName,
-            dtl.add_price as addPrice
+            menu_dtl_id as menuDtlId,
+            add_menu_name as addMenuName,
+            add_price as addPrice,
+            menu_id as menuId
         from
-            menuDtl dtl join addMenuNameDtl nameDtl on nameDtl.add_menu_name_id = dtl.add_menu_name_id
+            menuDtl
         where
-            dtl.menu_id = #{menuId}
+            menu_id = #{menuId}
     </select>
 
 
-    <insert id="createAddMenu" parameterType="com.korit.passorder.entity.MenuMst">
-        insert into menuMst
-        values (0, #{addPrice}, #{menuId}, #{addMenuNameId})
+    <insert id="createMenuDtl" parameterType="com.korit.passorder.entity.MenuDtl">
+        insert into menuDtl
+        values (0, #{addPrice}, #{menuId}, #{addMenuName})
+
     </insert>
 
 

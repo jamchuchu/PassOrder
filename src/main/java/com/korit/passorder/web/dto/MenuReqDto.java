@@ -13,11 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class MenuReqDto {
-    private int menuId;
-    private int cafeId;
     private String menuName;
-    private String category;
     private int menuPrice;
+    private String category;
+    private String hotAndice;
+    private boolean shotStatus;
+    private boolean whipStatus;
+    private int hotAndicePrice;
+    private int shotPrice;
+    private int whipPrice;
 
-    List<MenuDtl> menuDtl;
 }

@@ -1,5 +1,6 @@
 package com.korit.passorder.service;
 
+import com.korit.passorder.entity.MenuDtl;
 import com.korit.passorder.entity.MenuMst;
 import com.korit.passorder.respository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class MenuService {
     @Autowired
     MenuRepository menuRepository;
 
-    public void createMenu(MenuMst menuMst){
-        menuRepository.createMenu(menuMst);
+    public int createMenu(MenuMst menuMst){
+        return menuRepository.createMenu(menuMst);
         // menudtl 함께 추가
     };
     public MenuMst getMenuByMenuId(int menuId){
@@ -29,5 +30,19 @@ public class MenuService {
         return menuRepository.getMenuByCafeId(cafeId);
     };
 
+    public List<String> getCategoriesByCafeId(int cafeId){
+        return menuRepository.getCategoriesByCafeId(cafeId);
+    }
+
+    //menudtl 추가
+    public void createMenuDtls(List<MenuDtl> menuDtlList){
+        for(MenuDtl dtl : menuDtlList){
+            createMenuDtl(dtl);
+        }
+    }
+
+    public int createMenuDtl(MenuDtl menuDtl){
+        return menuRepository.createMenuDtl(menuDtl);
+    }
 
 }
