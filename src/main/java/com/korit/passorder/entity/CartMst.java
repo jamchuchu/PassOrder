@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class CartMst {
     private int cartId;
     private int userId;
+    private int cafeId;
     private int menuId;
     private String status;
     private boolean shot;

@@ -68,20 +68,24 @@ class UserMenuEvent {
         menuSaveButton.onclick = () => {
 
             const menuName = document.querySelector(".menuName").innerText;
-            const menuPrice = parseInt(document.querySelector(".menu-price").innerText);
+            let totalPrice = parseInt(document.querySelector(".menu-price").innerHTML);
+            const prices = document.querySelectorAll(".add-menu-plus-price");
+            const price = parseInt(prices[0].innerText.split('원')[0]);
+            totalPrice += price;
             const hotAndice = Array.from(document.getElementsByName("hotAndice")).find(radio => radio.checked).value;    
-            const addMenuPlusPrices = Array.from(document.querySelectorAll(".add-menu-plus-price")).map(price => parseInt(price.innerText.split('원')[0]));
             const shotStatus = Array.from(document.getElementsByName("shotStatus")).find(radio => radio.checked).value;    
             const whipStatus = Array.from(document.getElementsByName("whipStatus")).find(radio => radio.checked).value;    
-            let totalPrice = menuPrice + addMenuPlusPrices[1];
             
-            if(shotStatus){
-                totalPrice += addMenuPlusPrices[1];
+            if(shotStatus === "true"){
+                const price = parseInt(prices[1].innerText.split('원')[0]);
+                totalPrice += price;
             }
-            if(whipStatus){
-                totalPrice += addMenuPlusPrices[2];
+            if(whipStatus === "true"){
+                const price = parseInt(prices[2].innerText.split('원')[0]);
+                totalPrice += price;
             }
             
+            alert(totalPrice);
             const menu = new Menu(menuName, totalPrice, hotAndice, shotStatus, whipStatus);
             UserMenuApi.getInstance().addCart(menu);
 
