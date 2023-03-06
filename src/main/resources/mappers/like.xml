@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.passorder.respository.LikeRepository">
+
+    <insert id="addLike" parameterType="com.korit.passorder.entity.LikeMst">
+
+        insert into likeMst
+        values
+        (0, #{userId}, #{menuId}, #{cafeId})
+
+    </insert>
+
+    <delete id="deleteLike" parameterType="com.korit.passorder.entity.LikeMst">
+
+        delete
+            from likeMst
+        where
+            user_id=#{userId} and menu_id=#{menuId} and cafe_id=#{cafeId}
+
+    </delete>
+
+    <select id="getLikeStatus" resultType="com.korit.passorder.entity.LikeMst" >
+
+        select
+            like_id as likeId
+
+        from
+            likeMst
+        where
+            user_id=#{userId} and menu_id=#{menuId} and cafe_id=#{cafeId}
+
+    </select>
+
+
+    <select id="getLikeList" resultType="com.korit.passorder.entity.LikeMst" >
+
+        select
+            like_id as likeId,
+            user_id as userId,
+            menu_id as menuId,
+            cafe_id as cafeId
+
+        from
+            likeMst
+        where
+            user_id=#{userId} and cafe_id=#{cafeId}
+
+    </select>
+
+</mapper>
