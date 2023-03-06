@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.passorder.respository.CartRepository">
+
+    <insert id="createCart" useGeneratedKeys="true" keyProperty="cartId">
+        insert into cartMst
+        values (0, #{userId}, #{cafeId}, #{menuId}, #{status}, #{shot}, #{whip}, #{totalPrice})
+    </insert>
+
+    <select id="getCartByCartId" resultType="com.korit.passorder.entity.CartMst">
+        select
+            cart_id as cartId,
+            user_id as userId,
+            cafe_id as cafeId,
+            menu_id as menuId,
+            status,
+            shot,
+            whip,
+            total_price as totalPrice
+        from cartMst
+        where cart_id = ${cartId} and user_id = ${userId}
+    </select>
+
+    <select id="getCartByUser" resultType="com.korit.passorder.entity.CartMst">
+        select
+        cart_id as cartId,
+        user_id as userId,
+        cafe_id as cafeId,
+        menu_id as menuId,
+        status,
+        shot,
+        whip,
+        total_price as totalPrice
+        from cartMst
+        where user_id = ${userId}
+    </select>
+
+    <select id="getCartBycafeId" resultType="com.korit.passorder.entity.CartMst">
+        select
+        cart_id as cartId,
+        user_id as userId,
+        cafe_id as cafeId,
+        menu_id as menuId,
+        status,
+        shot,
+        whip,
+        total_price as totalPrice
+        from cartMst
+        where cafe_id = ${cafeId} and user_id = ${userId}
+    </select>
+
+    <select id="getCartBymenuId" resultType="com.korit.passorder.entity.CartMst">
+        select
+        cart_id as cartId,
+        user_id as userId,
+        cafe_id as cafeId,
+        menu_id as menuId,
+        status,
+        shot,
+        whip,
+        total_price as totalPrice
+        from cartMst
+        where menu_id = ${menuId} and user_id = ${userId}
+    </select>
+
+</mapper>

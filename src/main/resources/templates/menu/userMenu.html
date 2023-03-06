@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/common.css">
     <link rel="stylesheet" type="text/css" href="/static/css/header.css">
     <link rel="stylesheet" type="text/css" href="/static/css/menu/userMenu.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/menu/userMenupopup.css">
+
     <title>패스오더</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link
@@ -164,5 +166,129 @@
         </div>
       </div>
     </div>
+
+
+      
+    <div class="popup-container"> 
+      <div class="popup-wrap">
+        <div class="popup">
+          <div class="popup-head">
+              <h1 class="head-title">메뉴 등록</h1>
+          </div>
+          <div class="popup-body">
+            <div class="body-left-content">
+              <div class="register-image-container">
+                <img src="/static/images/no-image.jpg" alt="">
+              </div>
+            </div>
+            <div class="body-right-content">
+              <form action="" method="post">
+                    <div class="menu-name-box">
+                      <div class="option-label">
+                        <label for="menuName" class="option-label">메뉴명</label>
+                      </div>
+                      <p class="menuName">딸기라떼라떼</p>
+                    </div>
+                    <div class="menu-price-box">
+                      <div class="option-label">
+                        <label for="menu-price" class="option-label">메뉴가격</label>
+                      </div>
+                      <div>
+                        <p class="menu-price">5000</p>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">상태</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="hot-radio" name="hotAndice" value="hot">
+                          <label for="hot-radio" class="status-button hot-button">HOT</label>
+                          <input type="radio" id="ice-radio" name="hotAndice" value="ice">
+                          <label for="ice-radio" class="status-button ice-button">ICE</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">샷 추가</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="shot-none-radio" name="shotStatus" value=false>
+                          <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
+                          <input type="radio" id="shot-add-radio" name="shotStatus" value="true">
+                          <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">휘핑 추가</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="whip-none-radio" name="whipStatus" value=false>
+                          <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
+                          <input type="radio" id="whip-add-radio" name="whipStatus" value=true>
+                          <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </form>
+            </div>
+          </div>
+            <div class="button-group-footer">
+              <button type="button" class="footer-button close-button">취소</button>
+              <button type="button" class="footer-button save-button">장바구니</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/static/js/userMenu.js"></script>
+    <script type="text/javascript"> 
+      var popupContainer = document.querySelector(".popup-container"); 
+      var circleTrigger = document.querySelectorAll(".cart-button"); 
+      var closeButton = document.querySelector(".close-button");
+  
+     //console.log(modal);
+  
+     function toggleModal() { 
+        popupContainer.classList.toggle("show-popup-container"); 
+      }
+  
+     function windowOnClick(event) { 
+          if (event.target === popupContainer) { 
+              toggleModal(); 
+          } 
+      }
+  
+      circleTrigger.forEach(btn => {
+        if (btn.classList.contains("cart-button") && !btn.classList.contains("favorite-button")) {
+          btn.addEventListener("click", toggleModal);
+        }
+      });
+
+      closeButton.addEventListener("click", toggleModal);
+      window.addEventListener("click", windowOnClick);
+    </script>
   </body>
 </html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.passorder.respository.MenuRepository">
+
+
+    <insert id="createMenu" parameterType="com.korit.passorder.entity.MenuMst" useGeneratedKeys="true" keyProperty="menuId">
+        insert into menuMst
+        values (#{menuId}, #{cafeId}, #{menuName}, #{category}, #{menuPrice})
+    </insert>
+
+    <select id="getMenuByMenuId" resultType="com.korit.passorder.entity.MenuMst">
+        select
+            menu_id as menuId,
+            cafe_id as cafeId,
+            menu_name as menuName,
+            category,
+            menu_price as menuPrice
+        from
+            menuMst
+        where
+            menu_id = #{menuId}
+    </select>
+
+    <select id="getMenuByCategory" resultType="com.korit.passorder.entity.MenuMst">
+        select
+            menu_id as menuId,
+            cafe_id as cafeId,
+            menu_name as menuName,
+            category,
+            menu_price as menuPrice
+        from
+            menuMst
+        where
+            category = #{category}
+    </select>
+
+    <select id="getMenuByCafeId" parameterType="Integer"  resultType="com.korit.passorder.entity.MenuMst">
+        select
+            menu_id as menuId,
+            cafe_id as cafeId,
+            menu_name as menuName,
+            category,
+            menu_price as menuPrice
+        from
+            menuMst
+        where
+            cafe_id = #{cafeId}
+    </select>
+
+
+    <select id="getCategoriesByCafeId" resultType="String">
+        select
+            category
+        from
+            menuMst
+        where
+            cafe_id = #{cafeId} and category is not null
+        group by
+            category
+    </select>
+
+
+    <select id="getMenuIdByMenuName" resultType="com.korit.passorder.entity.MenuMst">
+        select
+            menu_id as menuId,
+            cafe_id as cafeId,
+            menu_name as menuName,
+            category,
+            menu_price as menuPrice
+        from
+            menuMst
+        where
+            cafe_id = #{cafeId} and menu_name = #{menuName}
+    </select>
+
+<!--    <update id="modifyMenu" parameterType="com.korit.passorder.entity.MenuMst">-->
+<!--        update-->
+<!--            menuMst-->
+<!--        set-->
+<!--            menu_id = #{menuId}-->
+<!--            cafe_id = #{cafeId}-->
+<!--            menu_name = #{menuName}-->
+<!--            category = #{category}-->
+<!--            menu_price = #{menuPrice}-->
+<!--            add_menu = #{addMenu}-->
+
+<!--    </update>-->
+
+<!--    menuDtl-->
+    <select id="getAddMenu" resultType="com.korit.passorder.entity.MenuDtl">
+        select
+            menu_dtl_id as menuDtlId,
+            add_menu_name as addMenuName,
+            add_price as addPrice,
+            menu_id as menuId
+        from
+            menuDtl
+        where
+            menu_id = #{menuId}
+    </select>
+
+
+    <insert id="createMenuDtl" parameterType="com.korit.passorder.entity.MenuDtl">
+        insert into menuDtl
+        values (0, #{addPrice}, #{menuId}, #{addMenuName})
+
+    </insert>
+
+
+</mapper>
