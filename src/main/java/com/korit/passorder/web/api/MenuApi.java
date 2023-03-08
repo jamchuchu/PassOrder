@@ -70,7 +70,7 @@ public class MenuApi {
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("admin/{category}")
     public ResponseEntity<?> getMenuByCategoryForAdmin(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable String category){
         int userId = principal.getUser().getUserId();
         int cafeId = cafeService.getCafeIdByUserId(userId);
@@ -78,6 +78,14 @@ public class MenuApi {
 
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
+
+    @GetMapping("user/{cafeId}/{category}")
+    public ResponseEntity<?> getMenuByCategoryForUser(@PathVariable int cafeId, @PathVariable String category){
+        List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
+
+        return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
+    }
+
 
     @GetMapping("/admin/cafeId")
     public ResponseEntity<?> getMenuByCafeIdForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
@@ -87,16 +95,22 @@ public class MenuApi {
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
 
-    @GetMapping("/cafeId/{cafeId}")
+    @GetMapping("/user/{cafeId}")
     public ResponseEntity<?> getMenuByCafeId(@PathVariable int cafeId){
         List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<?> getCategories(@AuthenticationPrincipal PrincipalDetails principal){
+    @GetMapping("/admin/category")
+    public ResponseEntity<?> getCategoriesForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
         int userId = principal.getUser().getUserId();
         int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<String> category = menuService.getCategoriesByCafeId(cafeId);
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
+    }
+
+    @GetMapping("/user/{cafeId}/category")
+    public ResponseEntity<?> getCategoriesForUser(@PathVariable int cafeId){
         List<String> category = menuService.getCategoriesByCafeId(cafeId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
     }

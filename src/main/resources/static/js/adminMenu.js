@@ -46,7 +46,7 @@ class AdminMenuApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "/api/menu/category",
+            url: "/api/menu/admin/category",
             dataType: "JSON",
             success: response => {
                 console.log(response);
@@ -81,7 +81,7 @@ class AdminMenuApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `/api/menu/${selectedCategory}`,
+            url: `/api/menu/admin/${category}`,
             dataType: "JSON",
             success: response => {
                 console.log(response);
@@ -241,6 +241,7 @@ class AdminMenuEvent {
        
         }
     }
+
 
 
     

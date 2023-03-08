@@ -265,30 +265,7 @@
 
     <script src="/static/js/userMenu.js"></script>
     <script type="text/javascript"> 
-      var popupContainer = document.querySelector(".popup-container"); 
-      var circleTrigger = document.querySelectorAll(".cart-button"); 
-      var closeButton = document.querySelector(".close-button");
-  
-     //console.log(modal);
-  
-     function toggleModal() { 
-        popupContainer.classList.toggle("show-popup-container"); 
-      }
-  
-     function windowOnClick(event) { 
-          if (event.target === popupContainer) { 
-              toggleModal(); 
-          } 
-      }
-  
-      circleTrigger.forEach(btn => {
-        if (btn.classList.contains("cart-button") && !btn.classList.contains("favorite-button")) {
-          btn.addEventListener("click", toggleModal);
-        }
-      });
 
-      closeButton.addEventListener("click", toggleModal);
-      window.addEventListener("click", windowOnClick);
     </script>
   </body>
 </html>
