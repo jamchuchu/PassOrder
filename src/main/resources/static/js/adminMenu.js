@@ -1,14 +1,12 @@
-window.onload = () => {
-
-
+window.addEventListener("load", () => {
     alert("ok");
     AdminMenuEvent.getInstance().addMenusSaveOnclickEvent();
     AdminMenuEvent.getInstance().addClickNoneEvent();
     AdminMenuEvent.getInstance().addClickcloseEvent();
-
-
+  
     AdminMenuService.getInstance().viewCategory();
-}
+    AdminMenuService.getInstance().viewAdminMenu("all");
+  });
 
 class AdminMenuApi {
     static #instance = null;
@@ -60,6 +58,41 @@ class AdminMenuApi {
         });
         return responseData;
     }
+
+    getAdminMenu(selectedCategory){
+        if(selectedCategory=="all"){
+            let responseData = null;
+            $.ajax({
+                async: false,
+                type: "get",
+                url: `/api/menu/admin/cafeId`,
+                dataType: "JSON",
+                success: response => {
+                    console.log(response);
+                    responseData = response;
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+            return responseData;
+        }
+        let responseData = null;
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/menu/${selectedCategory}`,
+            dataType: "JSON",
+            success: response => {
+                console.log(response);
+                responseData = response;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responseData;
+    }
 }
 
 
@@ -74,16 +107,57 @@ class AdminMenuService {
         return this.#instance;
     }
 
-    viewCategory(){
+    viewCategory() {
         const categoryBox = document.querySelector(".quick-group");
-        categoryBox.innerHTML = `<button type="button" class="left-button">전체메뉴</button>` ;
-
+        categoryBox.innerHTML = `
+          <input type="radio" id="all-menu-radio" name="menu-category" value="all" checked>
+          <label for="all-menu-radio" class="left-button">전체메뉴</label>
+        `;
+      
         const categories = AdminMenuApi.getInstance().getcagetory();
         categories.data.forEach((category) => {
-          categoryBox.innerHTML += `<button type="button" class="left-button" >${category}</button>`;
+          categoryBox.innerHTML += `
+            <input type="radio" id="${category}-menu-radio" name="menu-category" value="${category}">
+            <label for="${category}-menu-radio" class="left-button">${category.toUpperCase()}</label>
+          `;
         });
 
-    }
+        const categoryRadios = categoryBox.querySelectorAll('input[name="menu-category"]');
+        categoryRadios.forEach((radio) => {
+          radio.addEventListener("click", () => {
+            const selectedCategory = radio.value;
+            AdminMenuService.getInstance().viewAdminMenu(selectedCategory);
+          });
+        });
+      }
+
+    viewAdminMenu(selectedCategory) {
+        const menuBox = document.querySelector(".main-menu-drink-group");
+        menuBox.innerHTML = "";
+      
+        menuBox.innerHTML = `
+          <div class="main-menu-drink-box">
+            <div class="main-menu-drink-img">
+              <i class="fa-solid fa-circle-plus"></i>
+            </div>
+          </div>
+        `;
+      
+        const adminMenus = AdminMenuApi.getInstance().getAdminMenu(selectedCategory);
+        adminMenus.data.forEach((menu) => {
+          menuBox.innerHTML += `
+            <div class="main-menu-drink-box">
+            <p hidden>${menu.menuId}</p>
+              <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+              <div class="main-menu-drink-name"><p>${menu.menuName}</p></div>
+              <div class="cart-button-group">
+                <button type="button" class="cart-button">수정</button>
+                <button type="button" class="cart-button">삭제</button>
+              </div>
+            </div>
+          `;
+        });
+      }
 
 }
 

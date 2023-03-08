@@ -64,20 +64,30 @@ public class MenuApi {
         return  ResponseEntity.created(null).body(new CMRespDto<>(HttpStatus.CREATED.value(), "ok", menuReqDto));
     }
 
-    @GetMapping("/{menuId}")
+    @GetMapping("/menuId/{menuId}")
     public ResponseEntity<?> getMenuByMenuId(@PathVariable int menuId){
         MenuMst menuMst = menuService.getMenuByMenuId(menuId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
     }
 
     @GetMapping("/{category}")
-    public ResponseEntity<?> getMenuByCategory(@PathVariable String category){
-        List<MenuMst> menuMstList = menuService.getMenuByCategory(category);
+    public ResponseEntity<?> getMenuByCategoryForAdmin(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable String category){
+        int userId = principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
 
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
 
-    @GetMapping("/{cafeId}")
+    @GetMapping("/admin/cafeId")
+    public ResponseEntity<?> getMenuByCafeIdForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
+        int userId = principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
+        return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
+    }
+
+    @GetMapping("/cafeId/{cafeId}")
     public ResponseEntity<?> getMenuByCafeId(@PathVariable int cafeId){
         List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));

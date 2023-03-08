@@ -22,8 +22,8 @@ public class MenuService {
     public MenuMst getMenuByMenuId(int menuId){
         return menuRepository.getMenuByMenuId(menuId);
     };
-    public List<MenuMst> getMenuByCategory(String category){
-        return menuRepository.getMenuByCategory(category);
+    public List<MenuMst> getMenuByCategory(int cafeId, String category){
+        return menuRepository.getMenuByCategory(cafeId, category);
     };
     public List<MenuMst> getMenuByCafeId(int cafeId){
         return menuRepository.getMenuByCafeId(cafeId);

@@ -52,10 +52,8 @@
       <div class="main-menu-container">
         <div id="quickmenu">
           <div class="quick-group">
-            <button type="button" class="left-button">전체메뉴</button>
-            <button type="button" class="left-button">커피</button>
-            <button type="button" class="left-button">음료</button>
-            <button type="button" class="left-button">TEA</button>
+            <input type="radio" id="all-menu-radio" name="menu-category" value="all">
+            <label for="all-menu-radio" class="left-button">전체메뉴</label>
           </div>
         </div>  
         <div class="admin-right-area"> <!-- recommend-content -->
@@ -70,6 +68,7 @@
                 </div>
               </div>
               <div class="main-menu-drink-box">
+                <p hidden>1</p>
                 <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
                 <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
                 <div class="cart-button-group">

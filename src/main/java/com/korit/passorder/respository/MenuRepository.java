@@ -10,7 +10,7 @@ import java.util.List;
 public interface MenuRepository {
     public int createMenu(MenuMst menuMst);
     public MenuMst getMenuByMenuId(int menuId);
-    public List<MenuMst> getMenuByCategory(String category);
+    public List<MenuMst> getMenuByCategory(int cafeId, String category);
     public List<MenuMst> getMenuByCafeId(int cafeId);
     public List<String> getCategoriesByCafeId(int cafeId);
     public MenuMst getMenuIdByMenuName(int cafeId, String menuName);

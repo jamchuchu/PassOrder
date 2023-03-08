@@ -95,6 +95,7 @@
 
     margin: 7px 0 7px 0;
 
+    background-color: white;
     color: rgb(0, 0, 0);
 
 }
@@ -113,6 +114,14 @@
     background-color: #002f6c;
 }
 
+.left-button:checked {
+    background-color: #002f6c;
+    border: 1px solid #002f6c;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
 .main-menu-container {
     display: flex;
     width: 100%;

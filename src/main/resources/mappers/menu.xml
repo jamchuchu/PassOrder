@@ -33,7 +33,7 @@
         from
             menuMst
         where
-            category = #{category}
+            category = #{category} and cafe_id = #{cafeId}
     </select>
 
     <select id="getMenuByCafeId" parameterType="Integer"  resultType="com.korit.passorder.entity.MenuMst">
