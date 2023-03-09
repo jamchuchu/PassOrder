@@ -96,6 +96,26 @@ class UserMenuApi {
         });
         return responseData;
     }
+
+    getMenuByMenuId(menuId){
+        let responseData = null;
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/menu/menuId/${menuId}`,
+            dataType: "JSON",
+            success: response => {
+                console.log(response);
+                responseData = response;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responseData;
+    }
+
+
 }
 
 
@@ -146,7 +166,7 @@ class UserMenuService {
         userMenus.data.forEach((menu) => {
           menuBox.innerHTML += `
           <div class="main-menu-drink-box">
-          <p hidden>${menu.menuId}</p>
+          <p class="menu-id" hidden>${menu.menuId}</p>
           <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
           <div class="main-menu-drink-name"><p>${menu.menuName}</p></div>
           <div class="cart-button-group">
@@ -156,6 +176,7 @@ class UserMenuService {
         </div>
           `;
         });
+        UserMenuEvent.getInstance().addClickCartButton();
       }
 }
 
@@ -201,9 +222,8 @@ class UserMenuEvent {
     }
 
     addClickCartButton(){
-        var popupContainer = document.querySelector(".popup-container"); 
-        var cartButton = document.querySelectorAll(".cart-button"); 
-        var closeButton = document.querySelector(".close-button");
+        var popupContainer = document.querySelector(".popup-container");
+        var cartButton = document.querySelectorAll(".cart-button");  
 
         //console.log(modal);
 
@@ -220,9 +240,11 @@ class UserMenuEvent {
         cartButton.forEach(btn => {
         if (btn.classList.contains("cart-button") && !btn.classList.contains("favorite-button")) {
             btn.addEventListener("click", toggleModal);
+            UserPopupService.getInstance().popupInnerText();
         }
         });
 
+        var closeButton = document.querySelector(".close-button");
         closeButton.addEventListener("click", toggleModal);
         window.addEventListener("click", windowOnClick);
         }
@@ -240,6 +262,138 @@ class UserPopupService {
 
         return this.#instance;
     }
+
+    popupInnerText(menuId){
+        const menu = UserMenuApi.getInstance().getUserMenuByMenuId(menuId);
+        alert(menu);
+        const body = document.querySelector(".popup-body");
+        body.innerHTML = `
+        <div class="popup-body">
+        <div class="body-left-content">
+          <div class="register-image-container">
+            <img src="/static/images/no-image.jpg" alt="">
+          </div>
+        </div>
+        <div class="body-right-content">
+          <form action="" method="post">
+                <div class="menu-name-box">
+                  <div class="option-label">
+                    <label for="menuName" class="option-label">메뉴명</label>
+                  </div>
+                  <p class="menuName">${menu.menuName}</p>
+                </div>
+                <div class="menu-price-box">
+                  <div class="option-label">
+                    <label for="menu-price" class="option-label">메뉴가격</label>
+                  </div>
+                  <div>
+                    <p class="menu-price">${menu.menuPrice}</p>
+                  </div>
+                </div>
+                `;
+        body.innerHTML +=        
+                `
+                <div class="menu-option-box">
+                  <div class="option-label">
+                    <label for="menuStatus">상태</label>
+                  </div>
+                  <div class="menu-button-input">
+                    <div class="menu-button-area">
+                `;
+         
+        menu.menuDtlList.array.forEach(dtl => {
+            if(dtl.addMenuName == "hot" || dtl.addMenuName == "ice"){
+            body.innerHTML +=`
+            <input type="radio" id="hot-radio" name="hotAndice" value="hot">
+            <label for="hot-radio" class="status-button hot-button">HOT</label>
+            <input type="radio" id="ice-radio" name="hotAndice" value="ice">
+            <label for="ice-radio" class="status-button ice-button">ICE</label>
+          </div>
+          <div class="add-hotandice-menu-price">
+          </div>
+        </div>
+      </div>
+      `
+                if(dtl.addMenuName == "hot"){
+                        const hotBtn = document.getElementById("hot-radio");
+                        if(hotBtn.checked == true){
+                            const addmenuPrice = document.querySelector(".add-hotandice-menu-price");
+                            addmenuPrice.innerHTML = `
+                            <p class="add-menu-plus-price">${dtl.addPrice}원</p>
+                            `
+                        }
+                }else{
+                    const iceBtn = document.getElementById("ice-radio");
+                    if(iceBtn.checked == true){
+                        const addmenuPrice = document.querySelector(".add-hotandice-menu-price");
+                        addmenuPrice.innerHTML = `
+                        <p class="add-menu-plus-price">${dtl.addPrice}원</p>
+                        `
+                    }
+                }
+            }else if(dtl.addMenuName == "shotAdd"){
+            body.innerHTML +=`
+                    <input type="radio" id="shot-none-radio" name="shotStatus" value=false>
+                    <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
+                    <input type="radio" id="shot-add-radio" name="shotStatus" value="true">
+                    <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
+                   </div>
+                  <div class="add-shot-menu-price">
+                  </div>
+                </div>
+              </div>
+              `;
+                    if(dtl.addPrice != 0){
+                        const addBtn = document.getElementById("shot-add-radio");
+                        if(addBtn.checked == true){
+                            const addmenuPrice = document.querySelector(".add-shot-menu-price");
+                            addmenuPrice.innerHTML = `
+                            <p class="add-menu-plus-price">${dtl.addPrice}원</p>
+                            `
+                        }
+                    }           
+            }else if(dtl.addMenuName == "whipAdd"){
+                body.innerHTML +=`
+                        <input type="radio" id="whip-none-radio" name="whipStatus" value=false>
+                        <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
+                        <input type="radio" id="whip-add-radio" name="whipStatus" value=true>
+                        <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
+                    </div>
+                      <div class="add-whip-menu-price">
+                      </div>
+                    </div>
+                  </div>
+                  `;
+                        if(dtl.addPrice != 0){
+                            const addBtn = document.getElementById("whip-add-radio");
+                            if(addBtn.checked == true){
+                                const addmenuPrice = document.querySelector(".add-whip-menu-price");
+                                addmenuPrice.innerHTML = `
+                                <p class="add-menu-plus-price">${dtl.addPrice}원</p>
+                                `
+                            }
+                        }           
+                }            
+    });
+    body.innerHTML +=
+                `       
+
+              </div>
+              
+              </form>
+              </div>
+            </div>
+              <div class="button-group-footer">
+                <button type="button" class="footer-button close-button">취소</button>
+                <button type="button" class="footer-button save-button">장바구니</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+     }
+
+
 }
 
 const cafeId = 26;

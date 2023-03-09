@@ -47,4 +47,8 @@ public class MenuService {
         return menuRepository.createMenuDtl(menuDtl);
     }
 
+
+    public List<MenuDtl> getMenuDtlByMenuId(int menuId){
+        return menuRepository.getMenuDtlByMenuId(menuId);
+    }
 }

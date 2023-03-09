@@ -108,5 +108,18 @@
 
     </insert>
 
+    <select id="getMenuDtlByMenuId" resultType="com.korit.passorder.entity.MenuDtl">
+        select
+            menu_dtl_id as menuDtlId,
+            add_price as addPrice,
+            menu_id as menuId,
+            add_menu_name as addMenuName
+        from
+            menuDtl
+        where
+            menu_id = #{menuId}
+    </select>
+
+
 
 </mapper>
