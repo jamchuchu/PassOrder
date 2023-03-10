@@ -1,5 +1,6 @@
 package com.korit.passorder.web.api;
 
+import com.korit.passorder.entity.CafeMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.CafeService;
 import com.korit.passorder.web.dto.CMRespDto;
@@ -26,6 +27,16 @@ public class CafeApi {
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", cafeId));
     }
 
+    @GetMapping("/cafe-info")
+    public ResponseEntity<?> getCafeInfo(@AuthenticationPrincipal PrincipalDetails principal){
 
+        int userId = principal.getUser().getUserId();
+
+        CafeMst cafeInfo = cafeService.getCafeByUserId(userId);
+        System.out.println("카페 정보: " + cafeInfo);
+
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", cafeInfo));
+
+    }
 
 }

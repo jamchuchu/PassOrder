@@ -18,6 +18,11 @@ public class MypageController {
         return "mypage/adminMypage";
     }
 
+    @GetMapping("/admin-order-management")
+    public String mypageOrderManagement() {
+        return "admin/orderManagement";
+    }
+
     @GetMapping("/user-modify")
     public String modifyUser() {
         return "modify/userModify";

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/cart/cart.css" />
 </head>
 
 <body>
@@ -42,12 +43,54 @@
             
             <main class="main-container">
                 <div class="sub-img-area">
-                    cart 페이지 만들어야함 ㅇㅇ
+                    <div class="main-title-container">
+                        <span>My Cart Status, 장바구니</span>
+                        <h1>고객님의 장바구니 현황입니다.</h1>
+                    </div>
                 </div>
     
     
-                <div>
-    
+                <div class="user-cart-container">
+                    <div class="user-cart-box">
+                        <div class="user-cart-box-title">
+                            <h1>장바구니</h1>
+                        </div>
+                        <div class="user-cartlist-box">
+                            <div id="user-cartlist-id" class="user-cartlist-title">
+                                <div class="cart-carttitle title-cart">cart_id</div>
+                                <div class="cart-carttitle title-cart">user_id</div>
+                                <div class="cart-carttitle title-cart">cafe_id</div>
+                                <div class="cart-carttitle title-cart">menu_id</div>
+                                <div class="cart-carttitle title-cart">status</div>
+                                <div class="cart-carttitle title-cart">shot</div>
+                                <div class="cart-carttitle title-cart">whip</div>
+                                <div class="cart-carttitle title-cart">total_price</div>
+                            </div>
+                            <div class="user-cartlist-title">
+                                <div class="cart-carttitle cart-cart-id">2</div>
+                                <div class="cart-carttitle cart-user-id">13</div>
+                                <div class="cart-carttitle cart-cafe-id">26</div>
+                                <div class="cart-carttitle cart-menu-id">21</div>
+                                <div class="cart-carttitle cart-status">ice</div>
+                                <div class="cart-carttitle cart-shot">0</div>
+                                <div class="cart-carttitle cart-whip">1</div>
+                                <div class="cart-carttitle cart-totalprice">6500</div>
+                            </div>
+                            <div class="user-cartlist-title">
+                                <div class="cart-carttitle cart-cart-id">2</div>
+                                <div class="cart-carttitle cart-user-id">13</div>
+                                <div class="cart-carttitle cart-cafe-id">26</div>
+                                <div class="cart-carttitle cart-menu-id">21</div>
+                                <div class="cart-carttitle cart-status">ice</div>
+                                <div class="cart-carttitle cart-shot">0</div>
+                                <div class="cart-carttitle cart-whip">1</div>
+                                <div class="cart-carttitle cart-totalprice">6500</div>
+                            </div>
+                        </div>
+                        <div class="cart-button-group">
+                            <button type="button" class="pay-button">결제하기</button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

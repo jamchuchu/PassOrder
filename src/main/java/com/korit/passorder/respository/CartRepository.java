@@ -1,6 +1,7 @@
 package com.korit.passorder.respository;
 
 import com.korit.passorder.entity.CartMst;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public interface CartRepository {
     public List<CartMst> getCartByUser(int userId);
     public List<CartMst> getCartBycafeId(int cafeId, int userId);
     public List<CartMst> getCartBymenuId(int menuId, int userId);
+
+    @Delete("delete from cartMst where cafe_id = #{cafeId} and user_id = #{userId}")
+    public void deleteCartByCafeId(int cafeId, int userId);
 
 
 
