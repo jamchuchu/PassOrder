@@ -50,4 +50,11 @@ public class MenuService {
         return menuRepository.getMenuDtlByMenuId(menuId);
     }
 
+    public int deleteMenu(int menuId){
+        return menuRepository.deleteMenu(menuId);
+    }
+    public int deleteMenuDtl(int menuId){
+        return menuRepository.deleteMenuDtl(menuId);
+    }
+
 }

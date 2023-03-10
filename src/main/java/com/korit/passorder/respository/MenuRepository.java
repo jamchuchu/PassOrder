@@ -18,6 +18,8 @@ public interface MenuRepository {
 
     public int createMenuDtl(MenuDtl menuDtl);
     public List<MenuDtl> getMenuDtlByMenuId(int menuId);
+    public int deleteMenu(int menuId);
+    public int deleteMenuDtl(int menuId);
 
 
 

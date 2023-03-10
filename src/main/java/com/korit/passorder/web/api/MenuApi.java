@@ -138,4 +138,12 @@ public class MenuApi {
     public ResponseEntity<?> getMenuDtlByMenuId(@PathVariable int menuId) {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuService.getMenuDtlByMenuId(menuId)));
     }
+
+    @DeleteMapping("/{menuId}")
+    public ResponseEntity<?> deleteMenu(@PathVariable int menuId) {
+        menuService.deleteMenu(menuId);
+        menuService.deleteMenuDtl(menuId);
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "delete", menuId));
+    }
+
 }

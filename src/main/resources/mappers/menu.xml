@@ -110,5 +110,16 @@
         menu_id = #{menuId}
     </select>
 
+    <delete id="deleteMenu">
+        delete
+        from menuMst
+        where menu_id = #{menuId}
+    </delete>
+
+    <delete id="deleteMenuDtl">
+        delete
+        from menuDtl
+        where menu_id = #{menuId}
+    </delete>
 
 </mapper>
