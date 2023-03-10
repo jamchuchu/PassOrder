@@ -67,8 +67,6 @@ public class MenuApi {
     @GetMapping("/menuId/{menuId}")
     public ResponseEntity<?> getMenuByMenuId(@PathVariable int menuId){
         MenuMst menuMst = menuService.getMenuByMenuId(menuId);
-        List<MenuDtl> menuDtls = menuService.getMenuDtlByMenuId(menuId);
-        menuMst.setMenuDtlList(menuDtls);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
     }
 
@@ -131,12 +129,6 @@ public class MenuApi {
 
     @PostMapping("/menuDtl")
     public ResponseEntity<?> createMenuDtl(@RequestBody  MenuDtl menuDtl) {
-        return ResponseEntity.created(null).body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuDtl));
-    }
-
-    @GetMapping("/menuDtl/{menuId}")
-    public ResponseEntity<?> getMenuDtlByMenuId(@PathVariable int menuId){
-        List<MenuDtl> menuDtlList = menuService.getMenuDtlByMenuId(menuId);
-        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuDtlList));
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuDtl));
     }
 }
