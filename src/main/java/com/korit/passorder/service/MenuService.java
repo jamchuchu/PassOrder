@@ -46,5 +46,15 @@ public class MenuService {
     public int createMenuDtl(MenuDtl menuDtl){
         return menuRepository.createMenuDtl(menuDtl);
     }
+    public List<MenuDtl> getMenuDtlByMenuId(int menuId){
+        return menuRepository.getMenuDtlByMenuId(menuId);
+    }
+
+    public int deleteMenu(int menuId){
+        return menuRepository.deleteMenu(menuId);
+    }
+    public int deleteMenuDtl(int menuId){
+        return menuRepository.deleteMenuDtl(menuId);
+    }
 
 }

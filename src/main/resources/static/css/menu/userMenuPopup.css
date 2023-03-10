@@ -140,7 +140,27 @@
   font-weight: 600;
 }
 
-.menu-option-box {
+.status-option-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 100px;
+
+  margin-bottom: 20px;
+}
+.shot-option-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 100px;
+
+  margin-bottom: 20px;
+}
+.whip-option-box {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

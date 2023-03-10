@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/index") // 로그인 인증 post 요청
                 .defaultSuccessUrl("/login-success")
                 .failureUrl("/login-fail");
-
+            //.and()
     }
 
 }

@@ -16,6 +16,40 @@
   transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 } 
 
+.show-popup-container { 
+  opacity: 1; 
+  visibility: visible; 
+  transform: scale(1.0); 
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
+} 
+
+
+.modify-popup-container { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0; 
+  transform: scale(1.1);
+  visibility: hidden;
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+} 
+
+
+.modify-popup-container.show-popup-container {
+  visibility: visible;
+  opacity: 1; 
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
 .popup-wrap {
   display: flex;
   flex-direction: column;
@@ -55,6 +89,15 @@
 }
 
 .popup-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 800px;
+  height: 500px;
+}
+
+.modify-popup-body {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -171,6 +214,36 @@
 
 
 .menu-option-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 100px;
+
+  margin-bottom: 20px;
+}
+.status-option-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 100px;
+
+  margin-bottom: 20px;
+}
+.shot-option-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 400px;
+  height: 100px;
+
+  margin-bottom: 20px;
+}
+.whip-option-box {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -351,12 +424,18 @@ input[type=radio]:checked + .whip-button {
   font-weight: 600;
 }
 
-.show-popup-container { 
-  opacity: 1; 
-  visibility: visible; 
-  transform: scale(1.0); 
-  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
-} 
+.modify-footer-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 120px;
+  height: 40px;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
 
 .btn-close { 
   width: 127px; height: 48px; 
