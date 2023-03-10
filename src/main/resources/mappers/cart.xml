@@ -20,7 +20,7 @@
             whip,
             total_price as totalPrice
         from cartMst
-        where cart_id = ${cartId} and user_id = ${userId}
+        where cart_id = #{cartId} and user_id = #{userId}
     </select>
 
     <select id="getCartByUser" resultType="com.korit.passorder.entity.CartMst">
@@ -34,7 +34,7 @@
         whip,
         total_price as totalPrice
         from cartMst
-        where user_id = ${userId}
+        where user_id = #{userId}
     </select>
 
     <select id="getCartBycafeId" resultType="com.korit.passorder.entity.CartMst">
@@ -48,7 +48,7 @@
         whip,
         total_price as totalPrice
         from cartMst
-        where cafe_id = ${cafeId} and user_id = ${userId}
+        where cafe_id = #{cafeId} and user_id = #{userId}
     </select>
 
     <select id="getCartBymenuId" resultType="com.korit.passorder.entity.CartMst">
@@ -62,7 +62,7 @@
         whip,
         total_price as totalPrice
         from cartMst
-        where menu_id = ${menuId} and user_id = ${userId}
+        where menu_id = #{menuId} and user_id = #{userId}
     </select>
 
 </mapper>

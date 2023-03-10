@@ -1,8 +1,13 @@
 package com.korit.passorder.web.api;
 
 import com.korit.passorder.aop.annotation.ParamsAspect;
+import com.korit.passorder.entity.CartMst;
+import com.korit.passorder.entity.OrderDtl;
 import com.korit.passorder.entity.OrderMst;
+import com.korit.passorder.respository.CartRepository;
+import com.korit.passorder.respository.OrderRepository;
 import com.korit.passorder.security.PrincipalDetails;
+import com.korit.passorder.service.CartService;
 import com.korit.passorder.service.OrderService;
 import com.korit.passorder.web.dto.CMRespDto;
 import io.swagger.annotations.Api;
@@ -22,6 +27,15 @@ import java.util.List;
 public class OrderApi {
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     @ParamsAspect
     @GetMapping("/order-list")
@@ -53,13 +67,51 @@ public class OrderApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", order));
     }
 
+    @GetMapping("/order-list-uncompleted")
+    public ResponseEntity<CMRespDto<?>> getOrderListUncompleted(OrderMst orderMst) {
+
+        List<OrderMst> uncompleted = orderService.getOrderMstListNotCompleted(orderMst);
+        System.out.println("uncompletedList: " + uncompleted);
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Get Uncompleted OrderList Successfully", uncompleted));
+    }
+
+    @GetMapping("/order-dtl-list-uncompleted/{orderId}")
+    public ResponseEntity<CMRespDto<?>> getOrderDtlListForAdmin(@PathVariable int orderId) {
+        OrderMst orderMst = new OrderMst();
+        orderMst.setOrderId(orderId);
+
+        List<OrderDtl> orderDtlList = orderService.getOrderDtlListNotCompleted(orderMst.getOrderId());
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Get OrderDtlList Successfully", orderDtlList));
+    }
+
+
+
+
     @ParamsAspect
-    @PatchMapping("/update-complete/{orderId}")
-    public ResponseEntity<CMRespDto<?>>orderComplete(OrderMst orderMst, @PathVariable int orderId) {
-        orderService.completeStatus(orderMst.getOrderId());
+    @PatchMapping("/update-complete")
+    public ResponseEntity<CMRespDto<?>>orderComplete(@RequestBody OrderMst orderMst) {
+        orderService.completeStatus(orderMst);
 
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Patch OrderStatus successfully", true));
+    }
+
+    @PostMapping("/create-order")
+    public ResponseEntity<CMRespDto<List<OrderMst>>> createNewOrder(@RequestBody List<CartMst> cartMstList) {
+
+        int cafeId = cartMstList.get(0).getCafeId(); // 첫 번째 카트의 cafeId를 사용
+        int userId = cartMstList.get(0).getUserId(); // 첫 번째 카트의 userId를 사용
+
+        List<OrderMst> orderList = orderService.createNewOrder(cafeId, userId);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Create Order Successfully", orderList));
     }
 }

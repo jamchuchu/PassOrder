@@ -1,6 +1,8 @@
 package com.korit.passorder.respository;
 
+import com.korit.passorder.entity.OrderDtl;
 import com.korit.passorder.entity.OrderMst;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,5 +14,13 @@ public interface OrderRepository {
 
     public OrderMst findOrderByOrderId(int orderId);
 
-    public Integer completeStatus(int orderId);
+    public int completeStatus(OrderMst orderMst);
+
+    public int createNewOrder(OrderMst orderMst);
+
+    public int createNewOrderDtl(OrderDtl orderDtl);
+
+    public List<OrderMst> getOrderListNotComplete(OrderMst orderMst);
+
+    public List<OrderDtl> getOrderDtlList(int orderId);
 }
