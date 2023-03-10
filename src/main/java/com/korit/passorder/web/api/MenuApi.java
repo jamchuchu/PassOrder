@@ -67,12 +67,15 @@ public class MenuApi {
     @GetMapping("/menuId/{menuId}")
     public ResponseEntity<?> getMenuByMenuId(@PathVariable int menuId){
         MenuMst menuMst = menuService.getMenuByMenuId(menuId);
+        List<MenuDtl> menuDtl = menuService.getMenuDtlByMenuId(menuId);
+        menuMst.setMenuDtlList(menuDtl);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
     }
 
     @GetMapping("admin/{category}")
     public ResponseEntity<?> getMenuByCategoryForAdmin(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable String category){
-        int userId = principal.getUser().getUserId();
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;
         int cafeId = cafeService.getCafeIdByUserId(userId);
         List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
 
@@ -89,8 +92,8 @@ public class MenuApi {
 
     @GetMapping("/admin/cafeId")
     public ResponseEntity<?> getMenuByCafeIdForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
-        int userId = principal.getUser().getUserId();
-        int cafeId = cafeService.getCafeIdByUserId(userId);
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
         List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
@@ -103,8 +106,8 @@ public class MenuApi {
 
     @GetMapping("/admin/category")
     public ResponseEntity<?> getCategoriesForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
-        int userId = principal.getUser().getUserId();
-        int cafeId = cafeService.getCafeIdByUserId(userId);
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
         List<String> category = menuService.getCategoriesByCafeId(cafeId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
     }
@@ -130,5 +133,9 @@ public class MenuApi {
     @PostMapping("/menuDtl")
     public ResponseEntity<?> createMenuDtl(@RequestBody  MenuDtl menuDtl) {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuDtl));
+    }
+    @GetMapping("/menuDtl/{menuId}")
+    public ResponseEntity<?> getMenuDtlByMenuId(@PathVariable int menuId) {
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuService.getMenuDtlByMenuId(menuId)));
     }
 }

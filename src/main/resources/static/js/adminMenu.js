@@ -1,11 +1,9 @@
 window.addEventListener("load", () => {
     alert("ok");
-    AdminMenuEvent.getInstance().addMenusSaveOnclickEvent();
-    AdminMenuEvent.getInstance().addClickNoneEvent();
-    AdminMenuEvent.getInstance().addClickcloseEvent();
-  
     AdminMenuService.getInstance().viewCategory();
     AdminMenuService.getInstance().viewAdminMenu("all");
+
+
   });
 
 class AdminMenuApi {
@@ -81,7 +79,7 @@ class AdminMenuApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `/api/menu/admin/${category}`,
+            url: `/api/menu/admin/${selectedCategory}`,
             dataType: "JSON",
             success: response => {
                 console.log(response);
@@ -142,7 +140,9 @@ class AdminMenuService {
             </div>
           </div>
         `;
-      
+
+
+
         const adminMenus = AdminMenuApi.getInstance().getAdminMenu(selectedCategory);
         adminMenus.data.forEach((menu) => {
           menuBox.innerHTML += `
@@ -157,6 +157,12 @@ class AdminMenuService {
             </div>
           `;
         });
+
+        AdminPopupService.getInstance().saveMenuPopupControl();
+        AdminMenuEvent.getInstance().saveMenuOnclickEvent();
+        AdminMenuEvent.getInstance().noneOptionBtnOnclickEvent();
+        // AdminMenuEvent.getInstance().resetBycloseBtnOnclick();
+
       }
 
 }
@@ -171,10 +177,9 @@ class AdminMenuEvent {
 
         return this.#instance;
     }
-    
 
 
-    addMenusSaveOnclickEvent() {
+    saveMenuOnclickEvent() {
         const menuSaveButton =  document.querySelector(".footer-button.save-button");
         menuSaveButton.onclick = () => {
 
@@ -191,12 +196,13 @@ class AdminMenuEvent {
             let menu = null;
 
             menu = new Menu(category, menuName, menuPrice, hotAndice, shotStatus, whipStatus, hotAndicePrice, shotPrice, whipPrice);
+            console.log(menu);
             AdminMenuApi.getInstance().registerMenu(menu);
         }
 
     }
 
-    addClickNoneEvent(){
+    noneOptionBtnOnclickEvent(){
         const shotStatusFalse = document.getElementsByName("shotStatus")[0];
         shotStatusFalse.onclick = () => {
             const shotPrice = document.querySelectorAll(".menu-register-input.menu-status-input")[1];
@@ -226,26 +232,79 @@ class AdminMenuEvent {
         } 
     }
 
-    addClickcloseEvent(){
+    resetBycloseBtnOnclick(){
         const closeButton =  document.querySelector(".footer-button.close-button");
         closeButton.onclick = () => {
-            document.querySelector("#category").value = null;
-            document.querySelector("#menuName").value = null;
-            document.querySelector("#menuPrice").value = null;
-            Array.from(document.getElementsByName("hotAndice")).find(radio => radio.checked).checked = null;    
-            Array.from(document.getElementsByName("shotStatus")).find(radio => radio.checked).checked = null;    
-            Array.from(document.getElementsByName("whipStatus")).find(radio => radio.checked).checked = null;    
-            document.querySelectorAll(".menu-register-input.menu-status-input")[0].value =  null;
-            document.querySelectorAll(".menu-register-input.menu-status-input")[1].value =  null;
-            document.querySelectorAll(".menu-register-input.menu-status-input")[2].value =null;
-       
+            try {
+                document.querySelector("#category").value = null;
+              } catch (error) {}
+              try {
+                document.querySelector("#menuName").value = null;
+              } catch (error) {}
+              try {
+                document.querySelector("#menuPrice").value = null;
+              } catch (error) {}
+              try {
+                Array.from(document.getElementsByName("hotAndice")).find(radio => radio.checked).checked = null;
+              } catch (error) {}
+              try {
+                Array.from(document.getElementsByName("shotStatus")).find(radio => radio.checked).checked = null;
+              } catch (error) {}
+              try {
+                Array.from(document.getElementsByName("whipStatus")).find(radio => radio.checked).checked = null;
+              } catch (error) {}
+              try {
+                document.querySelectorAll(".menu-register-input.menu-status-input").forEach(input => {
+                    input.value = null;
+                })
+              } catch (error) {}
+
         }
+
+
     }
 
 
 
     
 
+}
+
+
+class AdminPopupService {
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new AdminPopupService();
+        }
+
+        return this.#instance;
+    }
+
+    saveMenuPopupControl(){
+        var popupContainer = document.querySelector(".popup-container"); 
+        var circleTrigger = document.querySelector(".fa-circle-plus"); 
+        var closeButton = document.querySelector(".close-button");
+    
+       //console.log(modal);
+    
+       function toggleModal() { 
+          popupContainer.classList.toggle("show-popup-container"); 
+        }
+    
+       function windowOnClick(event) { 
+            if (event.target === popupContainer) { 
+                toggleModal(); 
+            } 
+        }
+    
+        circleTrigger.addEventListener("click", toggleModal);
+        closeButton.addEventListener("click", () => {
+            AdminMenuEvent.getInstance().resetBycloseBtnOnclick();
+            toggleModal();
+          });
+        window.addEventListener("click", windowOnClick);
+    }
 }
 
 
@@ -273,6 +332,3 @@ class Menu {
       this.whipPrice = whipPrice;
   }
 }
-
-    
-

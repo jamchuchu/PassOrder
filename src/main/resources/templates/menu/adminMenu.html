@@ -56,13 +56,14 @@
             <label for="all-menu-radio" class="left-button">전체메뉴</label>
           </div>
         </div>  
+
         <div class="admin-right-area"> <!-- recommend-content -->
           <div class="admin-menu-title">
             <h1>매장 상품</h1>
           </div>
           <div class="main-menu-content">
             <div class="main-menu-drink-group">
-              <div class="main-menu-drink-box">
+              <div class="create-menu-box">
                 <div class="main-menu-drink-img">
                   <i class="fa-solid fa-circle-plus"></i>
                 </div>
@@ -240,26 +241,7 @@
     </div>
   </div>
   <script src="/static/js/adminMenu.js"></script>
-  <script type="text/javascript"> 
-    var popupContainer = document.querySelector(".popup-container"); 
-    var circleTrigger = document.querySelector(".fa-circle-plus"); 
-    var closeButton = document.querySelector(".close-button");
 
-   //console.log(modal);
 
-   function toggleModal() { 
-      popupContainer.classList.toggle("show-popup-container"); 
-    }
-
-   function windowOnClick(event) { 
-        if (event.target === popupContainer) { 
-            toggleModal(); 
-        } 
-    }
-
-    circleTrigger.addEventListener("click", toggleModal);
-    closeButton.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
-</script>
 </body>
 </html>

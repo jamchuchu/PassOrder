@@ -89,17 +89,7 @@
 <!--    </update>-->
 
 <!--    menuDtl-->
-    <select id="getAddMenu" resultType="com.korit.passorder.entity.MenuDtl">
-        select
-            menu_dtl_id as menuDtlId,
-            add_menu_name as addMenuName,
-            add_price as addPrice,
-            menu_id as menuId
-        from
-            menuDtl
-        where
-            menu_id = #{menuId}
-    </select>
+
 
 
     <insert id="createMenuDtl" parameterType="com.korit.passorder.entity.MenuDtl">
@@ -107,6 +97,18 @@
         values (0, #{addPrice}, #{menuId}, #{addMenuName})
 
     </insert>
+
+    <select id="getMenuDtlByMenuId" resultType="com.korit.passorder.entity.MenuDtl">
+        select
+        menu_dtl_id as menuDtlId,
+        add_menu_name as addMenuName,
+        add_price as addPrice,
+        menu_id as menuId
+        from
+        menuDtl
+        where
+        menu_id = #{menuId}
+    </select>
 
 
 </mapper>
