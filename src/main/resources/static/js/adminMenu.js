@@ -1,12 +1,8 @@
 window.addEventListener("load", () => {
     AdminMenuService.getInstance().viewCategory();
     AdminMenuService.getInstance().viewAdminMenu("all");
-    
-    AdminMenuEvent.getInstance().saveMenuOnclickEvent();
-    AdminMenuEvent.getInstance().noneOptionBtnOnclickEvent();
-    
+  
     AdminPopupService.getInstance().saveMenuPopupClose();
-    AdminPopupService.getInstance().modifyMenuPopupClose();
 
 
   });
@@ -107,6 +103,8 @@ class AdminMenuApi {
             success: response => {
                 console.log(response);
                 responseData = response.data;
+                location.replace("/menu/admin");
+
             },
             error: error => {
                 console.log(error);
@@ -114,6 +112,25 @@ class AdminMenuApi {
         });
         return responseData;
     }
+
+    
+    getMenuByMenuId(menuId){
+      let responseData = null;
+      $.ajax({
+          async: false,
+          type: "get",
+          url: `/api/menu/menuId/${menuId}`,
+          dataType: "JSON",
+          success: response => {
+              console.log(response);
+              responseData = response.data;
+          },
+          error: error => {
+              console.log(error);
+          }
+      });
+      return responseData;
+  }
 }
 
 
@@ -224,6 +241,29 @@ class AdminMenuEvent {
 
     }
 
+    modifyMenuOnclickEvent() {
+      const menuSaveButton =  document.querySelector(".footer-button.modify-button");
+      menuSaveButton.onclick = () => {
+
+          const category = document.querySelector("#category").value;
+          const menuName = document.querySelector("#menuName").value;
+          const menuPrice =  document.querySelector("#menuPrice").value;
+          const hotAndice = Array.from(document.getElementsByName("hotAndice")).find(radio => radio.checked).value;    
+          const shotStatus = Array.from(document.getElementsByName("shotStatus")).find(radio => radio.checked).value;    
+          const whipStatus = Array.from(document.getElementsByName("whipStatus")).find(radio => radio.checked).value;    
+          const hotAndicePrice = document.querySelectorAll(".menu-register-input.menu-status-input")[0].value;
+          const shotPrice = document.querySelectorAll(".menu-register-input.menu-status-input")[1].value;
+          const whipPrice = document.querySelectorAll(".menu-register-input.menu-status-input")[2].value;
+      
+          let menu = null;
+
+          menu = new Menu(category, menuName, menuPrice, hotAndice, shotStatus, whipStatus, hotAndicePrice, shotPrice, whipPrice);
+          console.log(menu);
+          AdminMenuApi.getInstance().registerMenu(menu);
+      }
+
+  }
+
     noneOptionBtnOnclickEvent(){
         const shotStatusFalse = document.getElementsByName("shotStatus")[0];
         shotStatusFalse.onclick = () => {
@@ -254,37 +294,7 @@ class AdminMenuEvent {
         } 
     }
 
-    resetBycloseBtnOnclick(){
-        const closeButton =  document.querySelector(".footer-button.close-button");
-        closeButton.onclick = () => {
-            try {
-                document.querySelector("#category").value = null;
-              } catch (error) {}
-              try {
-                document.querySelector("#menuName").value = null;
-              } catch (error) {}
-              try {
-                document.querySelector("#menuPrice").value = null;
-              } catch (error) {}
-              try {
-                Array.from(document.getElementsByName("hotAndice")).find(radio => radio.checked).checked = null;
-              } catch (error) {}
-              try {
-                Array.from(document.getElementsByName("shotStatus")).find(radio => radio.checked).checked = null;
-              } catch (error) {}
-              try {
-                Array.from(document.getElementsByName("whipStatus")).find(radio => radio.checked).checked = null;
-              } catch (error) {}
-              try {
-                document.querySelectorAll(".menu-register-input.menu-status-input").forEach(input => {
-                    input.value = null;
-                })
-              } catch (error) {}
 
-        }
-
-
-    }
 
     deleteBtnOnclickEvent(){
         const deleteBtn =  document.querySelectorAll(".cart-button-delete");
@@ -319,322 +329,91 @@ class AdminPopupService {
         var popupContainer = document.querySelector(".popup-container"); 
         var circleTrigger = document.querySelector(".fa-circle-plus"); 
     
-       //console.log(modal);
-    
-       function toggleModal() { 
-            popupContainer.classList.toggle("show-popup-container"); 
+
+        circleTrigger.onclick = () => {
+          AdminMenuEvent.getInstance().saveMenuOnclickEvent();
+          AdminPopupService.getInstance().resetPopupInnerText();
+          popupContainer.classList.add("show-popup-container");
         }
-
-        circleTrigger.addEventListener("click", toggleModal);
     }
-
-
 
 
     saveMenuPopupClose(){
         var popupContainer = document.querySelector(".popup-container"); 
-        var closeButton = document.querySelector(".close-button");
-    
-       //console.log(modal);
-    
-       function toggleModal() { 
-            popupContainer.classList.toggle("show-popup-container"); 
+        var closeButton = document.querySelector(".footer-button.close-button");
+
+        closeButton.onclick = ()=> {
+          popupContainer.classList.remove("show-popup-container"); 
         }
-    
-       function windowOnClick(event) { 
-            if (event.target === popupContainer) { 
-                toggleModal(); 
-            } 
-        }
-    
-        closeButton.addEventListener("click", () => {
-            AdminMenuEvent.getInstance().resetBycloseBtnOnclick();
-            toggleModal();
-          });
-        window.addEventListener("click", windowOnClick);
+        
     }
 
 
 
     modifyMenuPopupOpen(){
         const modifyBtn =  document.querySelectorAll(".cart-button-modify");
-        const modifyPopup = document.querySelector(".modify-popup-container");
+        const modifyPopup = document.querySelector(".popup-container");
 
 
         modifyBtn.forEach(btn => {
             btn.onclick = () => {
-              modifyPopup.classList.add("show-popup-container");
               const menuId = btn.id.split("-")[2];
               AdminPopupService.getInstance().setModifyPopupInnerText(menuId);
+              modifyPopup.classList.add("show-popup-container");
+
             }
           });
     }
 
-    
-    modifyMenuPopupClose(){
-        const modifyBtn =  document.querySelector(".modify-footer-button.close-button");
-        const modifyPopup = document.querySelector(".modify-popup-container");
-
-
-            modifyBtn.onclick = () => {
-                modifyPopup.classList.remove("show-popup-container");
-            }
-    
-    }
 
 
     setModifyPopupInnerText(menuId){
-        var modifyBody = document.querySelector(".modify-popup-body");
-        const menu = AdminMenuApi.getInstance().getMenuByMenuId(menuId);
+      const menu = AdminMenuApi.getInstance().getMenuByMenuId(menuId);
 
-        modifyBody.innerHTML = "";
-        modifyBody.innerHTML =`
-        <div class="modify-popup-body">
-          <div class="body-left-content">
-            <div class="register-image-container">
-              <img src="/static/images/no-image.jpg" alt="">
-            </div>
-            <div class="image-button-group">
-              <button type="button" class="img-button modify">수정</button>
-              <button type="button" class="img-button delete">삭제</button>
-            </div>
-          </div>
-          <div class="body-right-content">
-            <form action="" method="post">
-                  <div class="menu-name-box">
-                    <div class="option-label">
-                      <label for="menu-category-box" class="option-label">카테고리</label>
-                    </div>
-                    <input type="text" id="menuName" class="menu-register-input menu-name-input" name="menuName" value="${menu.category}" placeholder="등록할 메뉴이름을 입력해주세요" requried
-                    >
-                  </div>
-                  <div class="menu-name-box">
-                    <div class="option-label">
-                      <label for="menuName" class="option-label">메뉴명</label>
-                    </div>
-                    <input type="text" id="menuName" class="menu-register-input menu-name-input" name="menuName" value="${menu.menuName}" placeholder="등록할 메뉴이름을 입력해주세요" requried>
-                  </div>
-                  <div class="menu-price-box">
-                    <div class="option-label">
-                      <label for="menu-price" class="option-label">메뉴가격</label>
-                    </div>
-                    <input type="text" id="menuPrice" class="menu-register-input menu-price-input" name="menuPrice"  value="${menu.menuPrice}"   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  placeholder="등록할 메뉴가격을 입력해주세요" requried>
-                  </div>
+          document.querySelector("#category").value = menu.category;
+          document.querySelector("#menuName").value = menu.menuName;
+          document.querySelector("#menuPrice").value =  menu.menuPrice;
+          menu.menuDtlList.forEach(dtl => {
 
-                  <div class="status-option-box">
-                    <div class="option-label">
-                      <label for="menuStatus">상태</label>
-                    </div>
-                    <div class="menu-button-input">
-                      <div class="menu-button-area">
-                        
-                        <input type="radio" id="hot-radio" name="hotAndice" value="hot">
-                        <label for="hot-radio" class="status-button hot-button">HOT</label>
-                        <input type="radio" id="ice-radio" name="hotAndice" value="ice">
-                        <label for="ice-radio" class="status-button ice-button">ICE</label>
-                      </div>
-                      <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                        <p>원</p>
-                      </div>
-                    </div>
-                  </div>
+            if (dtl.addMenuName === 'hot') {
+              document.getElementById('hot-radio').checked = true;
+              document.querySelector('#status').value = dtl.addPrice;
+            } else if (dtl.addMenuName === 'ice') {
+              document.getElementById('ice-radio').checked = true;
+              document.querySelector('#status').value = dtl.addPrice;
+            } else if (dtl.addMenuName === 'shotAdd') {
+              document.getElementById('shot-add-radio').checked = true;
+              document.querySelector('#shot').value = dtl.addPrice;
+            } else if (dtl.addMenuName === 'shotNone') {
+              document.getElementById('shot-none-radio').checked = true;
+              document.querySelector('#shot').value = dtl.addPrice;
+            } else if (dtl.addMenuName === 'whipAdd') {
+              document.getElementById('whip-add-radio').checked = true;
+              document.querySelector('#whip').value = dtl.addPrice;
+            } else if (dtl.addMenuName === 'whipNone') {
+              document.getElementById('whip-none-radio').checked = true;
+              document.querySelector('#whip').value = dtl.addPrice;
 
-                  <div class="shot-option-box">
-                    <div class="option-label">
-                      <label for="menuStatus">샷 추가</label>
-                    </div>
-                    <div class="menu-button-input">
-                      <div class="menu-button-area">
-                        <input type="radio" id="shot-none-radio" name="shotStatus" value=false>
-                        <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
-                        <input type="radio" id="shot-add-radio" name="shotStatus" value="true">
-                        <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
-                      </div>
-                      <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500"  requried>
-                        <p>원</p>
-                      </div>
-                    </div>
-                  </div>
+            }
+          })
 
-                  <div class="whip-option-box">
-                    <div class="option-label">
-                      <label for="menuStatus">휘핑 추가</label>
-                    </div>
-                    <div class="menu-button-input">
-                      <div class="menu-button-area">
-                        <input type="radio" id="whip-none-radio" name="whipStatus" value=false>
-                        <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
-                        <input type="radio" id="whip-add-radio" name="whipStatus" value=true>
-                        <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
-                      </div>
-                      <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                        <p>원</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-          </form>
-          </div>
-                `
 
-                menu.menuDtlList.forEach(dtl => {
-                    if(dtl.addMenuName == "hot"){
-                        var addMenuBox = document.querySelector(".status-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += 
-                        `
-                        <div class="status-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">상태</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            
-                            <input type="radio" id="hot-radio" name="hotAndice" value="hot" checked>
-                            <label for="hot-radio" class="status-button hot-button">HOT</label>
-                            <input type="radio" id="ice-radio" name="hotAndice" value="ice">
-                            <label for="ice-radio" class="status-button ice-button">ICE</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"   value = "${dtl.addPrice}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-                        `
-                    }else if(dtl.addMenuName == "ice"){
-                        var addMenuBox = document.querySelector(".status-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += 
-                        `
-                        <div class="status-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">상태</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            
-                            <input type="radio" id="hot-radio" name="hotAndice" value="hot" >
-                            <label for="hot-radio" class="status-button hot-button">HOT</label>
-                            <input type="radio" id="ice-radio" name="hotAndice" value="ice" checked>
-                            <label for="ice-radio" class="status-button ice-button">ICE</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"   value = "${dtl.addPrice}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-                        `
-                    }
-
-                    if(dtl.addMenuName == "shotAdd"){
-                        var addMenuBox = document.querySelector(".shot-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += 
-                        `
-                        <div class="shot-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">샷 추가</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            <input type="radio" id="shot-none-radio" name="shotStatus" value=false>
-                            <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
-                            <input type="radio" id="shot-add-radio" name="shotStatus" value="true" checked>
-                            <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"  ${dtl.addPrice}  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500"  requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-    
-                        `
-                    }else if(dtl.addMenuName == "shotNone"){
-                        var addMenuBox = document.querySelector(".shot-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += `
-                        <div class="shot-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">샷 추가</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            <input type="radio" id="shot-none-radio" name="shotStatus" value=false checked>
-                            <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
-                            <input type="radio" id="shot-add-radio" name="shotStatus" value="true">
-                            <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500"  requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-                        `
-                    }
-
-                    if(dtl.addMenuName == "whipAdd"){
-                        var addMenuBox = document.querySelector(".whip-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += `
-                        <div class="whip-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">휘핑 추가</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            <input type="radio" id="whip-none-radio" name="whipStatus" value=false>
-                            <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
-                            <input type="radio" id="whip-add-radio" name="whipStatus" value=true checked>
-                            <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"  value="${dtl.addPrice}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-              </form>
-              </div>`
-                    }else if(dtl.addMenuName == "whipNone"){
-                        var addMenuBox = document.querySelector(".whip-option-box");
-                        addMenuBox.innerHTML = "";
-                        addMenuBox.innerHTML += `
-                        <div class="menu-option-box">
-                        <div class="option-label">
-                          <label for="menuStatus">휘핑 추가</label>
-                        </div>
-                        <div class="menu-button-input">
-                          <div class="menu-button-area">
-                            <input type="radio" id="whip-none-radio" name="whipStatus" value=false checked>
-                            <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
-                            <input type="radio" id="whip-add-radio" name="whipStatus" value=true >
-                            <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
-                          </div>
-                          <div class="menu-input-area">
-                            <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
-                            <p>원</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-              </form>
-              </div>`
-                    }
-
-                    });
-                
     }
+
+    resetPopupInnerText(){
+      const radioInputs = document.querySelectorAll('.popup-container input[type="radio"]');
+      const textInputs = document.querySelectorAll('.popup-container input[type="text"]');
+      
+      radioInputs.forEach(radio => {
+        radio.checked = null;
+      })
+
+      textInputs.forEach(text => {
+        text.value = null;
+      })
+    }
+
+  
 }
 
 
