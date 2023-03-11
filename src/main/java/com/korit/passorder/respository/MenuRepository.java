@@ -21,6 +21,9 @@ public interface MenuRepository {
     public int deleteMenu(int menuId);
     public int deleteMenuDtl(int menuId);
 
+    public int modifyMenuMst(MenuMst menuMst);
+    public int modifyMenuDtl(MenuDtl menuDtl);
+
 
 
 }

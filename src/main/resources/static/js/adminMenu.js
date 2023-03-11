@@ -131,6 +131,25 @@ class AdminMenuApi {
       });
       return responseData;
   }
+
+  modifyMenu(menuId, menu){
+    $.ajax({
+        async: false,
+        type: "put",
+        url: `/api/menu/${menuId}`,
+        contentType: "application/json",
+        data: JSON.stringify(menu),
+        dataType: "JSON",
+        success: response => {
+            console.log(response);
+            alert("메뉴 수정 완료. 메뉴 페이지로 이동합니다.");
+            location.replace("/menu/admin");
+        },
+        error: error => {
+            console.log(error);
+        }
+    });
+}
 }
 
 
@@ -241,9 +260,9 @@ class AdminMenuEvent {
 
     }
 
-    modifyMenuOnclickEvent() {
-      const menuSaveButton =  document.querySelector(".footer-button.modify-button");
-      menuSaveButton.onclick = () => {
+    modifyMenuOnclickEvent(menuId) {
+      const modifyBtn =  document.querySelector(".footer-button.save-button");
+      modifyBtn.onclick = () => {
 
           const category = document.querySelector("#category").value;
           const menuName = document.querySelector("#menuName").value;
@@ -259,7 +278,7 @@ class AdminMenuEvent {
 
           menu = new Menu(category, menuName, menuPrice, hotAndice, shotStatus, whipStatus, hotAndicePrice, shotPrice, whipPrice);
           console.log(menu);
-          AdminMenuApi.getInstance().registerMenu(menu);
+          AdminMenuApi.getInstance().modifyMenu(menuId, menu);
       }
 
   }
@@ -308,6 +327,8 @@ class AdminMenuEvent {
             }
         });
     }
+
+    
 
 
     
@@ -358,6 +379,7 @@ class AdminPopupService {
         modifyBtn.forEach(btn => {
             btn.onclick = () => {
               const menuId = btn.id.split("-")[2];
+              AdminMenuEvent.getInstance().modifyMenuOnclickEvent(menuId);
               AdminPopupService.getInstance().setModifyPopupInnerText(menuId);
               modifyPopup.classList.add("show-popup-container");
 

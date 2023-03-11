@@ -57,4 +57,17 @@ public class MenuService {
         return menuRepository.deleteMenuDtl(menuId);
     }
 
+    public void modifyMenuMst(MenuMst menuMst){
+        menuRepository.modifyMenuMst(menuMst);
+        menuMst.getMenuDtlList().forEach(dtl -> {
+            modifyMenuDtl(dtl);
+        });
+    }
+
+    public int modifyMenuDtl(MenuDtl menuDtl){
+        return menuRepository.modifyMenuDtl(menuDtl);
+    }
+
+
+
 }

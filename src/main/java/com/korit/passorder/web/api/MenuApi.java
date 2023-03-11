@@ -146,4 +146,36 @@ public class MenuApi {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "delete", menuId));
     }
 
+    @PutMapping("/{menuId}")
+    public ResponseEntity<?> modifyMenu(@PathVariable int menuId, @RequestBody MenuReqDto menuReqDto) {
+
+        MenuMst menuMst = MenuMst.builder().
+                menuId(menuId).
+                menuName(menuReqDto.getMenuName()).
+                menuPrice(menuReqDto.getMenuPrice()).
+                category(menuReqDto.getCategory()).build();
+
+        List<MenuDtl> menuDtlList = new ArrayList<>();
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.getHotAndice()).
+                addPrice(menuReqDto.getHotAndicePrice()).
+                menuId(menuMst.getMenuId()).build());
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.isShotStatus()?"shotAdd" : "shotNone").
+                addPrice(menuReqDto.isShotStatus()? menuReqDto.getShotPrice(): 0).
+                menuId(menuMst.getMenuId()).build());
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.isWhipStatus()?"whipAdd" : "whipNone").
+                addPrice(menuReqDto.isWhipStatus()? menuReqDto.getWhipPrice(): 0).
+                menuId(menuMst.getMenuId()).build());
+
+        menuMst.setMenuDtlList(menuDtlList);
+        menuService.modifyMenuMst(menuMst);
+
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "modifyOK", menuMst));
+    }
+
 }

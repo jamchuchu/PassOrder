@@ -122,4 +122,23 @@
         where menu_id = #{menuId}
     </delete>
 
+    <update id="modifyMenuMst" parameterType="com.korit.passorder.entity.MenuMst">
+        update menuMst
+        set
+            menu_name = #{menuName},
+            category = #{category},
+            menu_price = #{menuPrice}
+        where
+            menu_id = #{menuId}
+    </update>
+
+    <update id="modifyMenuDtl" parameterType="com.korit.passorder.entity.MenuDtl">
+            update menuDtl
+        set
+            add_menu_name =#{addMenuName} ,
+            add_price = #{addPrice}
+        where
+            menu_id = #{menuId}
+    </update>
+
 </mapper>
