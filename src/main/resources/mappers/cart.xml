@@ -9,7 +9,7 @@
         values (0, #{userId}, #{cafeId}, #{menuId}, #{status}, #{shot}, #{whip}, #{totalPrice})
     </insert>
 
-    <select id="getCartByCartId" resultType="com.korit.passorder.entity.CartMst"><![CDATA[
+    <select id="getCartByCartId" resultType="com.korit.passorder.entity.CartMst">
         select
             cart_id as cartId,
             user_id as userId,
@@ -22,6 +22,7 @@
         from cartMst
 
         where cart_id = #{cartId} and user_id = #{userId}
+    </select>
 
 
     <select id="getCartByUser" resultType="com.korit.passorder.entity.CartMst">
