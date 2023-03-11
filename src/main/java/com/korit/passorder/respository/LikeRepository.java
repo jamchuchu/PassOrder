@@ -15,7 +15,7 @@ public interface LikeRepository {
 
     public void deleteLike(int userId, int menuId, int cafeId);
 
-    public List<LikeMst> getLikeList(int userId, int cafeId);
+    public List<LikeMst> getLikeList(int userId, int cafeId, int start);
 }
 
 

@@ -149,7 +149,12 @@ class AdminMenuApi {
             console.log(error);
         }
     });
-}
+  }
+
+
+
+
+
 }
 
 
@@ -163,6 +168,7 @@ class AdminMenuService {
 
         return this.#instance;
     }
+  
 
     viewCategory() {
         const categoryBox = document.querySelector(".quick-group");

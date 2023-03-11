@@ -27,30 +27,26 @@ public class LikeApi {
 
     @ParamsAspect
     @PostMapping("/like")
-    public ResponseEntity<? extends CMRespDto<?>> like (@RequestBody LikeMst likeMst, BindingResult bindingResult){
-
-
-        likeService.createLikeMst(likeMst.getUserId(), likeMst.getMenuId(), likeMst.getCafeId());
-
+    public ResponseEntity<? extends CMRespDto<?>> like (@RequestBody LikeMst likeMst , @AuthenticationPrincipal PrincipalDetails principal){
+        int userId = principal.getUser().getUserId();
+        likeService.createLikeMst(userId, likeMst.getMenuId(), likeMst.getCafeId());
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(),"successfully",true));
+                .body(new CMRespDto<>(HttpStatus.OK.value(),"successfully", likeMst));
     }
 
-    @GetMapping("/like-list")
-    public ResponseEntity<? extends CMRespDto<List<LikeMst>>> likeList(@AuthenticationPrincipal PrincipalDetails principalDetails){
-
-        int userId = principalDetails.getUser().getUserId();
-        int cafeId = 26;
-
-
-        List<LikeMst> likeMstList = likeService.createLikeList(userId, cafeId);
-        System.out.println(likeMstList);
+    @ParamsAspect
+    @GetMapping("/like-list/{cafeId}/{start}")
+    public ResponseEntity<? extends CMRespDto<List<LikeMst>>> likeList(@PathVariable int cafeId, @PathVariable int start, @AuthenticationPrincipal PrincipalDetails principal){
+        int userId = principal.getUser().getUserId();
+        List<LikeMst> likeMstList = likeService.createLikeList(userId, cafeId, start);
 
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "likeMstList set 성공",likeMstList));
 
     }
+
+
 
 }
