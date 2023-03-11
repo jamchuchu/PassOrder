@@ -52,24 +52,24 @@
       <div class="main-menu-container">
         <div id="quickmenu">
           <div class="quick-group">
-            <button type="button" class="left-button">전체메뉴</button>
-            <button type="button" class="left-button">커피</button>
-            <button type="button" class="left-button">음료</button>
-            <button type="button" class="left-button">TEA</button>
+            <input type="radio" id="all-menu-radio" name="menu-category" value="all">
+            <label for="all-menu-radio" class="left-button">전체메뉴</label>
           </div>
         </div>  
+
         <div class="admin-right-area"> <!-- recommend-content -->
           <div class="admin-menu-title">
             <h1>매장 상품</h1>
           </div>
           <div class="main-menu-content">
             <div class="main-menu-drink-group">
-              <div class="main-menu-drink-box">
+              <div class="create-menu-box">
                 <div class="main-menu-drink-img">
                   <i class="fa-solid fa-circle-plus"></i>
                 </div>
               </div>
               <div class="main-menu-drink-box">
+                <p hidden>1</p>
                 <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
                 <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
                 <div class="cart-button-group">
@@ -157,7 +157,7 @@
                     <div class="option-label">
                       <label for="menu-category-box" class="option-label">카테고리</label>
                     </div>
-                    <input type="text" id="menuName" class="menu-register-input menu-name-input" name="menuName" placeholder="등록할 메뉴이름을 입력해주세요" requried
+                    <input type="text" id="category" class="menu-register-input menu-category-input" name="category" placeholder="등록할 카테고리를 입력해주세요" requried
                     >
                   </div>
                   <div class="menu-name-box">
@@ -186,7 +186,7 @@
                         <label for="ice-radio" class="status-button ice-button">ICE</label>
                       </div>
                       <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
+                        <input type="text" id="status" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
                         <p>원</p>
                       </div>
                     </div>
@@ -204,7 +204,7 @@
                         <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
                       </div>
                       <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500"  requried>
+                        <input type="text" id="shot" class="menu-register-input menu-status-input" name="menuStatus"    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500"  requried>
                         <p>원</p>
                       </div>
                     </div>
@@ -222,7 +222,7 @@
                         <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
                       </div>
                       <div class="menu-input-area">
-                        <input type="text" id="menuStatus" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
+                        <input type="text" id="whip" class="menu-register-input menu-status-input" name="menuStatus"     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" / placeholder="옵션의 가격을 입력해주세요 example) 500" requried>
                         <p>원</p>
                       </div>
                     </div>
@@ -240,27 +240,12 @@
      </div>
     </div>
   </div>
+
+
+
+
   <script src="/static/js/adminMenu.js"></script>
-  <script type="text/javascript"> 
-    var popupContainer = document.querySelector(".popup-container"); 
-    var circleTrigger = document.querySelector(".fa-circle-plus"); 
-    var closeButton = document.querySelector(".close-button");
 
-   //console.log(modal);
 
-   function toggleModal() { 
-      popupContainer.classList.toggle("show-popup-container"); 
-    }
-
-   function windowOnClick(event) { 
-        if (event.target === popupContainer) { 
-            toggleModal(); 
-        } 
-    }
-
-    circleTrigger.addEventListener("click", toggleModal);
-    closeButton.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
-</script>
 </body>
 </html>

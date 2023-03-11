@@ -64,29 +64,56 @@ public class MenuApi {
         return  ResponseEntity.created(null).body(new CMRespDto<>(HttpStatus.CREATED.value(), "ok", menuReqDto));
     }
 
-    @GetMapping("/{menuId}")
+    @GetMapping("/menuId/{menuId}")
     public ResponseEntity<?> getMenuByMenuId(@PathVariable int menuId){
         MenuMst menuMst = menuService.getMenuByMenuId(menuId);
+        List<MenuDtl> menuDtl = menuService.getMenuDtlByMenuId(menuId);
+        menuMst.setMenuDtlList(menuDtl);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMst));
     }
 
-    @GetMapping("/{category}")
-    public ResponseEntity<?> getMenuByCategory(@PathVariable String category){
-        List<MenuMst> menuMstList = menuService.getMenuByCategory(category);
+    @GetMapping("admin/{category}")
+    public ResponseEntity<?> getMenuByCategoryForAdmin(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable String category){
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;
+        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
 
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
 
-    @GetMapping("/{cafeId}")
+    @GetMapping("user/{cafeId}/{category}")
+    public ResponseEntity<?> getMenuByCategoryForUser(@PathVariable int cafeId, @PathVariable String category){
+        List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
+
+        return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
+    }
+
+
+    @GetMapping("/admin/cafeId")
+    public ResponseEntity<?> getMenuByCafeIdForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
+        return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
+    }
+
+    @GetMapping("/user/{cafeId}")
     public ResponseEntity<?> getMenuByCafeId(@PathVariable int cafeId){
         List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<?> getCategories(@AuthenticationPrincipal PrincipalDetails principal){
-        int userId = principal.getUser().getUserId();
-        int cafeId = cafeService.getCafeIdByUserId(userId);
+    @GetMapping("/admin/category")
+    public ResponseEntity<?> getCategoriesForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
+//        int userId = principal.getUser().getUserId();
+        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<String> category = menuService.getCategoriesByCafeId(cafeId);
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
+    }
+
+    @GetMapping("/user/{cafeId}/category")
+    public ResponseEntity<?> getCategoriesForUser(@PathVariable int cafeId){
         List<String> category = menuService.getCategoriesByCafeId(cafeId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
     }
@@ -107,4 +134,48 @@ public class MenuApi {
     public ResponseEntity<?> createMenuDtl(@RequestBody  MenuDtl menuDtl) {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuDtl));
     }
+    @GetMapping("/menuDtl/{menuId}")
+    public ResponseEntity<?> getMenuDtlByMenuId(@PathVariable int menuId) {
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuService.getMenuDtlByMenuId(menuId)));
+    }
+
+    @DeleteMapping("/{menuId}")
+    public ResponseEntity<?> deleteMenu(@PathVariable int menuId) {
+        menuService.deleteMenu(menuId);
+        menuService.deleteMenuDtl(menuId);
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "delete", menuId));
+    }
+
+    @PutMapping("/{menuId}")
+    public ResponseEntity<?> modifyMenu(@PathVariable int menuId, @RequestBody MenuReqDto menuReqDto) {
+
+        MenuMst menuMst = MenuMst.builder().
+                menuId(menuId).
+                menuName(menuReqDto.getMenuName()).
+                menuPrice(menuReqDto.getMenuPrice()).
+                category(menuReqDto.getCategory()).build();
+
+        List<MenuDtl> menuDtlList = new ArrayList<>();
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.getHotAndice()).
+                addPrice(menuReqDto.getHotAndicePrice()).
+                menuId(menuMst.getMenuId()).build());
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.isShotStatus()?"shotAdd" : "shotNone").
+                addPrice(menuReqDto.isShotStatus()? menuReqDto.getShotPrice(): 0).
+                menuId(menuMst.getMenuId()).build());
+
+        menuDtlList.add(MenuDtl.builder().
+                addMenuName(menuReqDto.isWhipStatus()?"whipAdd" : "whipNone").
+                addPrice(menuReqDto.isWhipStatus()? menuReqDto.getWhipPrice(): 0).
+                menuId(menuMst.getMenuId()).build());
+
+        menuMst.setMenuDtlList(menuDtlList);
+        menuService.modifyMenuMst(menuMst);
+
+        return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "modifyOK", menuMst));
+    }
+
 }
