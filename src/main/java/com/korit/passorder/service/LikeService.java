@@ -28,9 +28,8 @@ public class LikeService {
         }
     }
 
-    public List<LikeMst> createLikeList(int userId, int cafeId){
-
-        return likeRepository.getLikeList(userId, cafeId);
+    public List<LikeMst> createLikeList(int userId, int cafeId, int start ){
+        return likeRepository.getLikeList(userId, cafeId, start);
 
     }
 }

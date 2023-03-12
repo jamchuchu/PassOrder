@@ -41,11 +41,11 @@
             user_id as userId,
             menu_id as menuId,
             cafe_id as cafeId
-
         from
             likeMst
         where
             user_id=#{userId} and cafe_id=#{cafeId}
+        limit #{start}, 3
 
     </select>
 

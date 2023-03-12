@@ -82,5 +82,13 @@ public class OrderService {
 
         return Collections.singletonList(orderMst);
     }
+
+    public List<OrderMst> getOrderbyAdmin(int cafeId, String start, String end) {
+        return orderRepository.getOrderbyAdmin(cafeId, start, end);
+    }
+
+    public List<OrderMst> getOrderGroupUserbyAdmin(int cafeId, String start, String end) {
+        return orderRepository.getOrderGroupUserbyAdmin(cafeId, start, end);
+    }
 }
 

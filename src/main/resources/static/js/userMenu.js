@@ -2,6 +2,7 @@ window.onload = () => {
 
     UserMenuService.getInstance().viewCategory();
     UserMenuService.getInstance().viewUserMenu("all");
+    UserMenuService.getInstance().viewLikeMenu(0);
 
 }
 
@@ -110,6 +111,25 @@ class UserMenuApi {
         });
         return responseData;
     }
+
+  getLikeMenu(start){
+    let responseData = null;
+    $.ajax({
+        async: false,
+        type: "get",
+        url: `/api/like-list/${cafeId}/${start}`,
+        dataType: "JSON",
+        success: response => {
+          console.log(`/api/like-list/${cafeId}/${start}`)
+            console.log(response);
+            responseData = response.data;
+        },
+        error: error => {
+            console.log(error);
+        }
+    });
+    return responseData;
+}
 }
 
 
@@ -125,6 +145,48 @@ class UserMenuService {
         return this.#instance;
     }
 
+    viewLikeMenu(start){
+
+      const likeMenu = UserMenuApi.getInstance().getLikeMenu(start);
+      const likeFull = document.querySelectorAll(".drink-box");
+
+
+      const likeName = document.querySelectorAll(".like-name");
+      if(likeMenu.length == 0){
+        alert("마지막 페이지 입니다.");
+        return;
+      }else{
+        likeFull.forEach(box => {
+          box.style.display = "none";
+        })
+        for(var i = 0 ; i <likeMenu.length; i++){
+          likeFull[i].style.display = "block";
+          var menuId = likeMenu[i].menuId;
+          var menu = UserMenuApi.getInstance().getMenuByMenuId(menuId);
+          likeName[i].innerText = menu.menuName;
+        }
+    }
+    UserMenuService.getInstance().likeMenuNext(start);
+  }
+
+
+    likeMenuNext(now){
+      const next = document.querySelector(".recommend-btn.recommend-right-button");
+      const pre = document.querySelector(".recommend-btn.recommend-left-button");
+
+      next.onclick = () => {
+        UserMenuService.getInstance().viewLikeMenu(now+3);
+      }
+      pre.onclick = () => {
+        if(now <= 0){
+          alert("첫번째 페이지 입니다.");
+        }else{
+          UserMenuService.getInstance().viewLikeMenu(now-3);
+        }
+      }
+    }
+
+    
     
     viewCategory() {
         const categoryBox = document.querySelector(".quick-group");
