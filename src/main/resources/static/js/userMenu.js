@@ -1,5 +1,9 @@
 window.onload = () => {
-
+    UserMenuHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    UserMenuHeaderEvent.getInstance().addMypageOnclickEvent();
+    UserMenuHeaderEvent.getInstance().addCartOnclickEvent();
+    UserMenuHeaderEvent.getInstance().addLogoOnclickEvent();
+    
     UserMenuService.getInstance().viewCategory();
     UserMenuService.getInstance().viewUserMenu("all");
     UserMenuService.getInstance().viewLikeMenu(0);
@@ -607,5 +611,49 @@ class Menu {
       this.hotAndice = hotAndice;
       this.shotStatus = shotStatus;
       this.whipStatus = whipStatus;
+  }
+}
+
+class UserMenuHeaderEvent {
+  static #instance = null;
+  static getInstance() {
+      if(this.#instance == null) {
+          this.#instance = new UserMenuHeaderEvent();
+      }
+
+      return this.#instance;
+  }
+
+  addCafeMenuOnclickEvent() {
+      const cafeMenuButton = document.querySelectorAll(".menu-container-nav")[0];
+
+      cafeMenuButton.onclick = () => {
+        alert("현재 페이지가 카페메뉴 페이지입니다.");
+        location.reload;
+      }
+  }
+  
+  addMypageOnclickEvent() {
+      const mypageMenuButton = document.querySelectorAll(".menu-container-nav")[1];
+
+      mypageMenuButton.onclick = () => {
+          location.href = '/mypage/user';
+      }
+  }
+
+  addCartOnclickEvent() {
+      const cartMenuButton = document.querySelectorAll(".menu-container-nav")[2];
+
+      cartMenuButton.onclick = () => {
+          location.href = '/cart/user';
+      }
+  }
+
+  addLogoOnclickEvent() {
+      const logoMenuButton = document.querySelector(".logo-button");
+
+      logoMenuButton.onclick = () => {
+          location.href = '/login-success';
+      }
   }
 }

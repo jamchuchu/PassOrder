@@ -1,4 +1,9 @@
 window.addEventListener("load", () => {
+    AdminMenuHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    AdminMenuHeaderEvent.getInstance().addMypageOnclickEvent();
+    AdminMenuHeaderEvent.getInstance().addCartOnclickEvent();
+    AdminMenuHeaderEvent.getInstance().addLogoOnclickEvent();
+
     AdminMenuService.getInstance().viewCategory();
     AdminMenuService.getInstance().viewAdminMenu("all");
   
@@ -468,5 +473,49 @@ class Menu {
       this.hotAndicePrice = hotAndicePrice;
       this.shotPrice = shotPrice;
       this.whipPrice = whipPrice;
+  }
+}
+
+class AdminMenuHeaderEvent {
+  static #instance = null;
+  static getInstance() {
+      if(this.#instance == null) {
+          this.#instance = new AdminMenuHeaderEvent();
+      }
+
+      return this.#instance;
+  }
+
+  addCafeMenuOnclickEvent() {
+      const cafeMenuButton = document.querySelectorAll(".menu-container-nav")[0];
+
+      cafeMenuButton.onclick = () => {
+        alert("현재 페이지가 관리자 메뉴관리 페이지입니다.");
+        location.reload;
+      }
+  }
+  
+  addMypageOnclickEvent() {
+      const mypageMenuButton = document.querySelectorAll(".menu-container-nav")[1];
+
+      mypageMenuButton.onclick = () => {
+          location.href = '/mypage/admin';
+      }
+  }
+
+  addCartOnclickEvent() {
+      const cartMenuButton = document.querySelectorAll(".menu-container-nav")[2];
+
+      cartMenuButton.onclick = () => {
+          location.href = '/mypage/admin-order-management';
+      }
+  }
+
+  addLogoOnclickEvent() {
+      const logoMenuButton = document.querySelector(".logo-button");
+
+      logoMenuButton.onclick = () => {
+          location.href = '/login-success';
+      }
   }
 }

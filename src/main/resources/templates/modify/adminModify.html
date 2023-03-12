@@ -24,27 +24,27 @@
     <div id="container">
       <header class="header-container">
         <div class="sns-container">
-          <button class="sns-button" disabled>
-              <i class="fa-brands fa-instagram"></i>
-              <i class="fa-brands fa-youtube"></i>
-              <i class="fa-brands fa-facebook"></i>
-          </button>
-        </div>
-        <div class="logo-container">
-            <h1 class="brand-logo"><a href="/index">PASSORDER</a></h1>
-        </div>
-        <ul class="menu-container">
-            <li><a href="">카페메뉴</a></li>
-            <li><a href="">마이페이지</a></li>
-            <li><a href="">장바구니</a></li>
-        </ul>
+            <button class="sns-button" disabled>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-facebook"></i>
+            </button>
+          </div>
+          <div class="logo-container">
+              <h1 class="brand-logo"><a href="javascript:void(0);" class="logo-button">PASSORDER</a></h1>
+          </div>
+          <ul class="menu-container">
+              <li><a href="javascript:void(0);" class="menu-container-nav">카페메뉴</a></li>
+              <li><a href="javascript:void(0);" class="menu-container-nav">마이페이지</a></li>
+              <li><a href="javascript:void(0);" class="menu-container-nav">장바구니</a></li>
+          </ul>
       </header>
         
         <main class="main-container">
           <div class="sub-img-area">
-            <div class="register-title-group">
-                <h1 class="register-main-title">회 원 정 보 수 정</h1>
-                <p class="register-sub-title">Join Us, PASSORDER</p>
+            <div class="main-title-container">
+              <span>ALWAYS BESIDE YOU, 회원정보 수정 페이지</span>
+              <h1>늘 당신 곁에, 패스오더는 항상 함께합니다.</h1>
             </div>
           </div>
 
@@ -84,7 +84,7 @@
               <div class="register-group">
                 <label for="register-repassword">새 비밀번호 확인</label>
                 <div class="input-group">
-                  <input type="password" id="modify-repassword" class="register-inputs" name="repassword" required="required"/>
+                  <input type="password" id="modify-repassword" class="register-inputs" name="repassword" placeholder="비밀번호 확인" required="required"/>
                   <div class="register-error"></div>
                 </div>
               </div>
@@ -135,7 +135,7 @@
         </main>
     </div>
     <script src="/static/js/component/header.js"></script>
-    <script src="/static/js/userModify.js"></script>
+    <script src="/static/js/adminModify.js"></script>
 </body>
 
 </html>

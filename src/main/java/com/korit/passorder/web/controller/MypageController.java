@@ -28,6 +28,11 @@ public class MypageController {
         return "modify/userModify";
     }
 
+    @GetMapping("/admin-modify")
+    public String modifyAdmin() {
+        return "modify/adminModify";
+    }
+
     @GetMapping("/sale-manage")
     public String saleManage() {
         return "mypage/saleManage";
