@@ -174,7 +174,7 @@ class UserMypageService {
 
         let innerHTML = '';
         const count = responseCoupon % 10;
-        const checkCount = Math.min(count, 6);
+        const checkCount = Math.min(count, 9);
         console.log("체크카운트 : " + checkCount);
         const circleCount = 10 - checkCount;
         

@@ -60,8 +60,8 @@ public class CartApi {
 
     @GetMapping("/userId")
     public ResponseEntity<?> getCartByUser(@AuthenticationPrincipal PrincipalDetails pricipal){
-//        int userId = pricipal.getUser().getUserId();
-        int userId = 13;
+        int userId = pricipal.getUser().getUserId();
+//        int userId = 13;
         List<CartMst> cartMst = cartService.getCartByUser(userId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", cartMst));
     }
@@ -75,7 +75,6 @@ public class CartApi {
     }
 
     @GetMapping("/menuId/{menuId}")
-
     public ResponseEntity<?> getCartBymenuId(@PathVariable int menuId, @AuthenticationPrincipal PrincipalDetails pricipal){
 //        int userId = pricipal.getUser().getUserId();
         int userId = 13;

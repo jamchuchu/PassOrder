@@ -1,6 +1,11 @@
 window.onload = () => {
     PrincipalModifyService.getInstance().modifyUserPrincipal();
     ModifyButtonEvent.getInstance().modifyButtonOnclickEvent();
+    UserModifyHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    UserModifyHeaderEvent.getInstance().addMypageOnclickEvent();
+    UserModifyHeaderEvent.getInstance().addCartOnclickEvent();
+    UserModifyHeaderEvent.getInstance().addLogoOnclickEvent();
+
 
 }
 
@@ -128,6 +133,61 @@ class ModifyButtonEvent {
 
             alert("비밀번호 변경 완료! 다시 로그인해주세요.");
             location.href = '/index';
+        }
+    }
+}
+
+class UserModifyHeaderEvent {
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new UserModifyHeaderEvent();
+        }
+
+        return this.#instance;
+    }
+
+    addCafeMenuOnclickEvent() {
+        const cafeMenuButton = document.querySelectorAll(".menu-container-nav")[0];
+        const loginPrincipalData = PrincipalApi.getInstance().getPrincipal();
+
+        cafeMenuButton.onclick = () => {
+            if(loginPrincipalData !== null) {
+                location.href = '/menu/user';
+            }
+        }
+    }
+    
+    addMypageOnclickEvent() {
+        const mypageMenuButton = document.querySelectorAll(".menu-container-nav")[1];
+        const loginPrincipalData = PrincipalApi.getInstance().getPrincipal();
+
+        mypageMenuButton.onclick = () => {
+            if(loginPrincipalData !== null) {
+                location.href = '/mypage/user';
+            }
+        }
+    }
+
+    addCartOnclickEvent() {
+        const cartMenuButton = document.querySelectorAll(".menu-container-nav")[2];
+        const loginPrincipalData = PrincipalApi.getInstance().getPrincipal();
+
+        cartMenuButton.onclick = () => {
+            if(loginPrincipalData !== null) {
+                location.href = '/cart/user';
+            }
+        }
+    }
+
+    addLogoOnclickEvent() {
+        const logoMenuButton = document.querySelector(".logo-button");
+        const loginPrincipalData = PrincipalApi.getInstance().getPrincipal();
+
+        logoMenuButton.onclick = () => {
+            if(loginPrincipalData !== null) {
+                location.href = '/login-success';
+            }
         }
     }
 }

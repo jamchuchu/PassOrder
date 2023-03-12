@@ -96,9 +96,6 @@ public class OrderApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Get OrderDtlList Successfully", orderDtlList));
     }
 
-
-
-
     @ParamsAspect
     @PatchMapping("/update-complete")
     public ResponseEntity<CMRespDto<?>>orderComplete(@RequestBody OrderMst orderMst) {
