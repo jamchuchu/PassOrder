@@ -101,7 +101,7 @@
         order_time as orderTime,
         total_price as totalPrice
         from orderMst
-        where order_time between #{start} and #{end} and complete = 1
+        where order_time between #{start} and DATE_ADD(#{end}, INTERVAL 1 DAY) and complete = 1
     </select>
 
     <select id="getOrderGroupUserbyAdmin"  resultType="com.korit.passorder.entity.OrderMst">
@@ -110,7 +110,7 @@
         user_id as userId,
         sum(total_price) as totalPrice
         from orderMst
-        where order_time between #{start} and #{end} and complete = 1
+        where order_time between #{start} and DATE_ADD(#{end}, INTERVAL 1 DAY) and complete = 1
         group by user_Id
     </select>
 

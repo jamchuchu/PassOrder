@@ -22,6 +22,24 @@ class UserMenuApi {
         return this.#instance;
     }
 
+    getPrincipal(){
+      let responseData = null;
+      $.ajax({
+          async: false,
+          type: "get",
+          url: `/api/account/principal`,
+          dataType: "JSON",
+          success: response => {
+              console.log(response);
+              responseData = response.data;
+          },
+          error: error => {
+              console.log(error);
+          }
+      });
+      return responseData;
+    }
+
     addCart(menu){
         let responseData = null;
         $.ajax({
@@ -134,6 +152,24 @@ class UserMenuApi {
     });
     return responseData;
 }
+
+getAllLikeMenu(){
+  let responseData = null;
+  $.ajax({
+      async: false,
+      type: "get",
+      url: `/api/like-list/${cafeId}/`,
+      dataType: "JSON",
+      success: response => {
+          console.log(response);
+          responseData = response.data;
+      },
+      error: error => {
+          console.log(error);
+      }
+  });
+  return responseData;
+}
 }
 
 
@@ -150,10 +186,16 @@ class UserMenuService {
     }
 
     viewLikeMenu(start){
+      const likeFull = document.querySelectorAll(".drink-box");
+      if(UserMenuApi.getInstance().getPrincipal() == null){
+        likeFull.forEach(box => {
+          box.style.display = "none";
+        });
+        document.querySelector(".error-message").hidden = false;
+        return;
+      }
 
       const likeMenu = UserMenuApi.getInstance().getLikeMenu(start);
-      const likeFull = document.querySelectorAll(".drink-box");
-
 
       const likeName = document.querySelectorAll(".like-name");
       if(likeMenu.length == 0){
@@ -231,12 +273,23 @@ class UserMenuService {
           <div class="main-menu-drink-name"><p>${menu.menuName}</p></div>
           <div class="cart-button-group">
             <button type="button" class="cart-button" id="menu-id-${menu.menuId}">장바구니</button>
-            <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+            <button type="button" class="cart-button favorite-button" id="like-menu-id-${menu.menuId}"><i class="fa-solid fa-heart-circle-plus"></i></button>
           </div>
         </div>
           `;
         });
+        if(UserMenuApi.getInstance().getPrincipal() != null){
+          const like = UserMenuApi.getInstance().getAllLikeMenu();
+          like.forEach(mst => {
+            var btn = document.querySelector(`#like-menu-id-${mst.menuId}`);
+            if(btn != null){
+              btn.classList.remove('normal-button');
+              btn.classList.add('cliked-like-button');
+            }
+          });
+        }
         UserMenuEvent.getInstance().cartBtnOnclickEvent();
+        likeEvent.getInstance().addClickEventFavoriteButtons();
       }
 }
 
@@ -656,4 +709,92 @@ class UserMenuHeaderEvent {
           location.href = '/login-success';
       }
   }
+}
+
+
+
+
+
+class LikeApi{
+  static #instance = null;
+  static getInstance(){
+    if (this.#instance == null) {
+      this.#instance = new LikeApi();
+  }
+  return this.#instance;
+  }
+
+  setFavoriteStatus(like){
+
+    $.ajax({
+      async :false,
+      type : "post",
+      url : `/api/like`,
+      contentType: "application/json",
+      data: JSON.stringify(like),
+      dataType : "json",
+      success : response =>{
+        console.log(response);
+      },
+      error : error=>{
+        console.log(error);
+      }
+    });
+
+  }
+
+
+
+}
+
+
+
+class likeEvent {
+  static #instance = null;
+  static getInstance() {
+    if (this.#instance == null) {
+      this.#instance = new likeEvent();
+    }
+    return this.#instance;
+  }
+
+  addClickEventFavoriteButtons(){
+    const favoriteButtons = document.querySelectorAll(".cart-button.favorite-button");
+    
+    favoriteButtons.forEach(btn => {
+      btn.onclick = () => {
+        if(UserMenuApi.getInstance().getPrincipal() == null){
+          alert("로그인 후 사용하실 수 있습니다.")
+          return;
+        }
+
+        var menuId =  btn.id.split("-")[3];
+        if (btn.classList.contains('cliked-like-button')) {
+          btn.classList.remove('cliked-like-button');
+          btn.classList.add('normal-button');
+        } else {
+          btn.classList.remove('normal-button');
+          btn.classList.add('cliked-like-button');
+        }
+        const like = new Like(0, 0, menuId, cafeId);
+        console.log(like);
+        LikeApi.getInstance().setFavoriteStatus(like);
+        UserMenuService.getInstance().viewLikeMenu(0);
+      }
+    })
+  }
+}
+
+class Like {
+  likeId = null;
+  userId = null;
+  menuId = null;
+  cafeId = null;
+
+  constructor(likeId, userId, menuId, cafeId) {
+    this.likeId = likeId;
+    this.userId = userId;
+    this.menuId = menuId;
+    this.cafeId = cafeId;
+}
 }

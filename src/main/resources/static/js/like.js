@@ -11,14 +11,14 @@ class LikeApi{
   return this.#instance;
   }
 
-  setFavoriteStatus(){
+  setFavoriteStatus(like){
 
     $.ajax({
       async :false,
       type : "post",
-      url : `http://localhost:8000/api/like`,
+      url : `/api/like`,
       contentType: "application/json",
-      data: JSON.stringify(user),
+      data: JSON.stringify(like),
       dataType : "json",
       success : response =>{
         console.log(response);
@@ -30,29 +30,13 @@ class LikeApi{
 
   }
 
-  setNormalStatus(){
 
-    $.ajax({
-      async:false,
-      type : "delete",
-      url : `http://localhost:8000/api/like`,
-      contentType: "application/json",
-      data: JSON.stringify(user),
-      dataType : "json",
-      success:response=>{
-        console.log(response);
-      },
-      error : error=>{
-        console.log(error);
-      }
-    });
-  }
 
 }
 
 
 
-class ComponentEvent {
+class likeEvent {
   static #instance = null;
   static getInstance() {
     if (this.#instance == null) {
@@ -61,23 +45,36 @@ class ComponentEvent {
     return this.#instance;
   }
 
-  addClickEventFavoriteButtons(){
-    const favoriteButtons = document.querySelectorAll(".favorite-buttons");
+  addClickEventFavoriteButtons(favoriteButtons, menuId){
     
     favoriteButtons.onclick = () => {
-      if (button.classList.contains('favorite-buttons')) {
-        
-        LikeApi.getInstance().setFavoriteStatus();
 
+      if (button.classList.contains('favorite-buttons')) {
         button.classList.remove('favorite-buttons');
         button.classList.add('normal-button');
       } else {
-
-        LikeApi.getInstance().setNormalStatus();
-
         button.classList.remove('normal-button');
         button.classList.add('favorite-buttons');
       }
+      const like = new Like(0, 0, menuId, cafeId);
+      console.log(like);
+      LikeApi.getInstance().setFavoriteStatus(like);
     }
   }
+}
+
+const cafeId = 26;
+
+class Like {
+  likeId = null;
+  userId = null;
+  menuId = null;
+  cafeId = null;
+
+  constructor(likeId, userId, menuId, cafeId) {
+    this.likeId = likeId;
+    this.userId = userId;
+    this.menuId = menuId;
+    this.cafeId = cafeId;
+}
 }
