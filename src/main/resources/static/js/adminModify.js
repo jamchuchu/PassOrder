@@ -4,7 +4,7 @@ window.onload = () => {
     AdminModifiyHeaderEvent.getInstance().addCartOnclickEvent();
     AdminModifiyHeaderEvent.getInstance().addLogoOnclickEvent();
 
-    PrincipalModifyService.getInstance().modifyUserPrincipal();
+    PrincipalModifyService.getInstance().modifyPrincipal();
     ModifyButtonEvent.getInstance().modifyButtonOnclickEvent();
 
 }
@@ -143,8 +143,8 @@ class ModifyButtonEvent {
             const modifyRePassword = document.querySelector('#modify-repassword').value;
             console.log("repassword value값: " + modifyRePassword);
 
-            const modifyCafeName = document.querySelector('#modify-strorename').value;
-            console.log("new storename value값 : " + modifyStoreName);
+            const modifyCafeName = document.querySelector('#modify-storename').value;
+            console.log("new storename value값 : " + modifyCafeName);
             
             const modifyAddress = document.querySelector('#modify-address').value;
             console.log("new address value값 : " + modifyAddress);
@@ -160,13 +160,13 @@ class ModifyButtonEvent {
             console.log("새 리패스워드 대입: " + Password.repassword);
 
             CafeInfo.cafeName = modifyCafeName;
-            console.log("새 지점명 대입 : "+ CafeInfo.cafeName )
+            console.log("새 지점명 대입 : " + CafeInfo.cafeName)
 
             CafeInfo.address = modifyAddress;
-            console.log("새 주소 대입 : "+ CafeInfo.address )
+            console.log("새 주소 대입 : " + CafeInfo.address)
 
             CafeInfo.phone = modifyPhone;
-            console.log("새 전화번호 대입 : "+ CafeInfo.phone )
+            console.log("새 전화번호 대입 : " + CafeInfo.phone)
 
 
             ModifyAdminApi.getInstance().modifyAdmin();
@@ -180,7 +180,7 @@ class ModifyButtonEvent {
             console.log(modifyResult2);
 
 
-            alert("정보 변경 완료! 다시 로그인해주세요.");
+            alert("회원 정보 수정 완료! 다시 로그인해주세요.");
             location.href = '/index';
         }
     }
