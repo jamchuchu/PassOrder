@@ -9,4 +9,5 @@ public interface CafeRepository {
     public int getCafeIdByUserId(int userId);
 
     public CafeMst getCafeByUserId(int userId);
+    public CafeMst getCafebyCafeId(int cafeId);
 }
