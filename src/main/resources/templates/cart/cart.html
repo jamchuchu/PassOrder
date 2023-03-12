@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>패스오더</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -24,21 +25,21 @@
         <div id="container">
             <header class="header-container">
                 <div class="sns-container">
-                  <button class="sns-button" disabled>
-                      <i class="fa-brands fa-instagram"></i>
-                      <i class="fa-brands fa-youtube"></i>
-                      <i class="fa-brands fa-facebook"></i>
-                  </button>
-                </div>
-                <div class="logo-container">
-                    <h1 class="brand-logo"><a href="/index">PASSORDER</a></h1>
-                </div>
-                <ul class="menu-container">
-                    <li><a href="">카페메뉴</a></li>
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="">장바구니</a></li>
-                </ul>
-              </header>
+                    <button class="sns-button" disabled>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-facebook"></i>
+                    </button>
+                  </div>
+                  <div class="logo-container">
+                      <h1 class="brand-logo"><a href="javascript:void(0);" class="logo-button">PASSORDER</a></h1>
+                  </div>
+                  <ul class="menu-container">
+                      <li><a href="javascript:void(0);" class="menu-container-nav">카페메뉴</a></li>
+                      <li><a href="javascript:void(0);" class="menu-container-nav">마이페이지</a></li>
+                      <li><a href="javascript:void(0);" class="menu-container-nav">장바구니</a></li>
+                  </ul>
+            </header>
         
             
             <main class="main-container">
@@ -66,26 +67,6 @@
                                 <div class="cart-carttitle title-cart">whip</div>
                                 <div class="cart-carttitle title-cart">total_price</div>
                             </div>
-                            <div class="user-cartlist-title">
-                                <div class="cart-carttitle cart-cart-id">2</div>
-                                <div class="cart-carttitle cart-user-id">13</div>
-                                <div class="cart-carttitle cart-cafe-id">26</div>
-                                <div class="cart-carttitle cart-menu-id">21</div>
-                                <div class="cart-carttitle cart-status">ice</div>
-                                <div class="cart-carttitle cart-shot">0</div>
-                                <div class="cart-carttitle cart-whip">1</div>
-                                <div class="cart-carttitle cart-totalprice">6500</div>
-                            </div>
-                            <div class="user-cartlist-title">
-                                <div class="cart-carttitle cart-cart-id">2</div>
-                                <div class="cart-carttitle cart-user-id">13</div>
-                                <div class="cart-carttitle cart-cafe-id">26</div>
-                                <div class="cart-carttitle cart-menu-id">21</div>
-                                <div class="cart-carttitle cart-status">ice</div>
-                                <div class="cart-carttitle cart-shot">0</div>
-                                <div class="cart-carttitle cart-whip">1</div>
-                                <div class="cart-carttitle cart-totalprice">6500</div>
-                            </div>
                         </div>
                         <div class="cart-button-group">
                             <button type="button" class="pay-button">결제하기</button>
@@ -94,6 +75,8 @@
                 </div>
             </main>
         </div>
+        <script src="/static/js/component/header.js"></script>
+        <script src="/static/js/cart.js"></script>
     </body>
 </body>
 

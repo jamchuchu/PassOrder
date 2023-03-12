@@ -1,4 +1,9 @@
 window.onload = () => {
+    RegisterHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    RegisterHeaderEvent.getInstance().addMypageOnclickEvent();
+    RegisterHeaderEvent.getInstance().addCartOnclickEvent();
+    RegisterHeaderEvent.getInstance().addLogoOnclickEvent();
+
     RegisterEvent.getInstance().addRegisterUserOnclickEvent();
     RegisterEvent.getInstance().addRegisterAdminOnclickEvent();
 }
@@ -197,7 +202,7 @@ class RegisterEvent {
                 <div class="register-group">
                   <label for="register-password">비밀번호</label>
                   <div class="input-group">
-                    <input type="password" id="register-password" class="register-inputs" name="password" placeholder="비밀번호"/>
+                    <input type="password" id="register-password" class="register-inputs" name="password"/>
                     <div class="register-error"></div>
                   </div>
                 </div>
@@ -267,7 +272,7 @@ class RegisterEvent {
               <div class="register-group">
                 <label for="register-password">비밀번호</label>
                 <div class="input-group">
-                  <input type="password" id="register-password" class="register-inputs" name="password" placeholder="비밀번호"/>
+                  <input type="password" id="register-password" class="register-inputs" name="password"/>
                   <div class="register-error"></div>
                 </div>
               </div>
@@ -326,6 +331,51 @@ class RegisterEvent {
             this.addRegisterAdminOnclickEvent();
         }
     }
+}
+
+class RegisterHeaderEvent {
+  static #instance = null;
+  static getInstance() {
+      if(this.#instance == null) {
+          this.#instance = new RegisterHeaderEvent();
+      }
+
+      return this.#instance;
+  }
+
+  addCafeMenuOnclickEvent() {
+      const cafeMenuButton = document.querySelectorAll(".menu-container-nav")[0];
+
+      cafeMenuButton.onclick = () => {
+        location.href = '/menu/user';
+      }
+  }
+  
+  addMypageOnclickEvent() {
+      const mypageMenuButton = document.querySelectorAll(".menu-container-nav")[1];
+
+      mypageMenuButton.onclick = () => {
+        alert("로그인을 하신 후 이용하실 수 있습니다.");
+        location.reload;
+      }
+  }
+
+  addCartOnclickEvent() {
+      const cartMenuButton = document.querySelectorAll(".menu-container-nav")[2];
+
+      cartMenuButton.onclick = () => {
+        alert("로그인을 하신 후 이용하실 수 있습니다.");
+        location.reload;
+      }
+  }
+
+  addLogoOnclickEvent() {
+      const logoMenuButton = document.querySelector(".logo-button");
+
+      logoMenuButton.onclick = () => {
+        location.href = '/index';
+      }
+  }
 }
 
 class User {
