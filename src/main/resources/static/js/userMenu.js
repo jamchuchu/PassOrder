@@ -309,8 +309,9 @@ class UserMenuEvent {
         menuSaveButton.onclick = () => {
         
             const menuName = document.querySelector(".menuName").innerText;
-            let totalPrice = parseInt(document.querySelector(".menu-price").innerText);
-        
+            var totalPrice = parseInt(document.querySelector(".menu-price").innerText);
+            console.log("price: " + totalPrice);
+
             let hotAndice = null;
             let shotStatus = null;
             let whipStatus = null;
@@ -336,26 +337,24 @@ class UserMenuEvent {
                 }
             } catch (error) {}
         
-            try {
                 const statusMenuPlusPrice = document.querySelector(".status-menu-plus-price");
-                if (statusMenuPlusPrice) {
+                if (statusMenuPlusPrice != null && statusMenuPlusPrice.innerText != "") {
                     totalPrice += parseInt(statusMenuPlusPrice.innerText.split("원")[0]);
-                }
-            } catch (error) {}
+                    console.log("status: " + parseInt(statusMenuPlusPrice.innerText.split("원")[0]));
+                  }
         
-            try {
                 const shotMenuPlusPrice = document.querySelector(".shot-menu-plus-price");
-                if (shotMenuPlusPrice) {
+                if (shotMenuPlusPrice != null && shotMenuPlusPrice.innerText != "") {
                     totalPrice += parseInt(shotMenuPlusPrice.innerText.split("원")[0]);
+                    console.log("shot: " + parseInt(shotMenuPlusPrice.innerText.split("원")[0]));
+
                 }
-            } catch (error) {}
         
-            try {
                 const whipMenuPlusPrice = document.querySelector(".whip-menu-plus-price");
-                if (whipMenuPlusPrice) {
+                if (whipMenuPlusPrice != null && whipMenuPlusPrice.innerText != "") {
                     totalPrice += parseInt(whipMenuPlusPrice.innerText.split("원")[0]);
-                }
-            } catch (error) {}
+                    console.log("whip: " + parseInt(whipMenuPlusPrice.innerText.split("원")[0]));
+                  }
         
             const menu = new Menu(menuName, totalPrice, hotAndice, shotStatus, whipStatus);
             console.log(menu);
@@ -367,31 +366,25 @@ class UserMenuEvent {
     }
 
     cartBtnOnclickEvent(){
+
+
         var popupContainer = document.querySelector(".popup-container"); 
         var cartButton = document.querySelectorAll(".cart-button"); 
-        var closeButton = document.querySelector(".close-button");
 
         //console.log(modal);
 
-        function toggleModal() { 
-        popupContainer.classList.toggle("show-popup-container"); 
-
-        }
-
-        function windowOnClick(event) { 
-            if (event.target === popupContainer) { 
-                toggleModal(); 
-            } 
-        }
 
         cartButton.forEach(btn => {
             if (btn.classList.contains("cart-button") && !btn.classList.contains("favorite-button")) {
-              btn.addEventListener("click", toggleModal);
               btn.onclick = () => {
+                if(UserMenuApi.getInstance().getPrincipal() == null){
+                  alert("로그인 후 사용하실 수 있습니다.")
+                }else{
+                popupContainer.classList.add("show-popup-container")
                 const menuId = btn.id.slice(8);
                 UserPopupService.getInstance().setPopupInnerText(menuId);
-                closeButton.addEventListener("click", toggleModal);
-                window.addEventListener("click", windowOnClick);
+                UserMenuEvent.getInstance().closeButtonOnclickEvent();
+              }
               };
             }
           });
@@ -404,7 +397,7 @@ class UserMenuEvent {
             var closeButton = document.querySelector(".close-button");
 
             closeButton.onclick = () => {
-                popupContainer.hidden = true;
+              popupContainer.classList.remove("show-popup-container")
             }
 
 
