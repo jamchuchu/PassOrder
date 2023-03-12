@@ -25,4 +25,19 @@
         where
             user_id = #{userId}
     </select>
+
+    <select id="getCafebyCafeId" resultType="com.korit.passorder.entity.CafeMst">
+        select
+        cafe_id as cafeId,
+        cafe_name as cafeName,
+        address,
+        phone,
+        open_time as openTime,
+        close_time as closeTime,
+        user_id as userId
+        from
+        cafeMst
+        where
+        cafe_id = #{cafeId}
+    </select>
 </mapper>

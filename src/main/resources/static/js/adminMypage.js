@@ -167,7 +167,7 @@ class AdminMypageHeaderEvent {
 
         LogOutSubmitButton.onclick = () => {
             if(loginPrincipalData !== null) {
-                location.href = '/index';
+                location.href = '/logout';
             }
         }
     }

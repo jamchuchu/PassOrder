@@ -19,4 +19,7 @@ public class CafeService {
     public CafeMst getCafeByUserId(int userId) {
         return cafeRepository.getCafeByUserId(userId);
     }
+    public CafeMst getCafebyCafeId(int cafeId) {
+        return cafeRepository.getCafebyCafeId(cafeId);
+    }
 }

@@ -32,4 +32,8 @@ public class LikeService {
         return likeRepository.getLikeList(userId, cafeId, start);
 
     }
+
+    public List<LikeMst> createLikeAllList(int userId, int cafeId){
+        return likeRepository.createLikeAllList(userId, cafeId);
+    }
 }

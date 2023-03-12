@@ -49,4 +49,18 @@
 
     </select>
 
+    <select id="createLikeAllList" resultType="com.korit.passorder.entity.LikeMst" >
+
+        select
+            like_id as likeId,
+            user_id as userId,
+            menu_id as menuId,
+            cafe_id as cafeId
+        from
+            likeMst
+        where
+            user_id=#{userId} and cafe_id=#{cafeId}
+
+    </select>
+
 </mapper>

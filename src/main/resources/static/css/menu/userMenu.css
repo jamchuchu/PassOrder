@@ -52,6 +52,10 @@
     padding-bottom: 50px;
 }
 
+.error-message{
+    font-size: 30px;
+    font-weight: 600;
+}
 
 /* 사이드바 css */
 
@@ -331,7 +335,6 @@ input[type=radio]:checked + .left-button {
 
 .favorite-button i {
     font-size: 20px;
-    color: black;
 
     width: 300px;
 }
@@ -340,6 +343,20 @@ input[type=radio]:checked + .left-button {
     font-size: 20px;
     color: red;
 }
+
+.cliked-like-button{
+    background-color: black;
+    font-size: 20px;
+    color: red;
+}
+
+.normal-button{
+    background-color: white;
+    font-size: 20px;
+    color: black;
+}
+
+
 
 .main-menu-drink-box button {
     display: flex;

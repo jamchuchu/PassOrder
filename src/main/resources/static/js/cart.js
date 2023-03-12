@@ -70,6 +70,47 @@ class CartApi {
 
         return responseData;
     }
+
+    getMenu(menuId){
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/menu/menuId/${menuId}`,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+                console.log(responseData);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return responseData;
+    }
+
+
+    getCafe(cafeId){
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/cafe/cafeId/${cafeId}`,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+                console.log(responseData);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return responseData;
+    }
 }
 
 class PaymentApi {
@@ -129,14 +170,13 @@ class CartService {
             const cartId = cart.cartId;
             console.log("innerHTML에 사용될 cartList에서 꺼낸 cartId: " + cartId);
 
-            const userId = cart.userId;
-            console.log("innerHTML에 사용될 cartList에서 꺼낸 userId: " + userId);
-
             const cafeId = cart.cafeId;
             console.log("innerHTML에 사용될 cartList에서 꺼낸 cafeId: " + cafeId);
+            const cafeName = CartApi.getInstance().getCafe(cafeId).cafeName;
 
             const menuId = cart.menuId;
             console.log("innerHTML에 사용될 cartList에서 꺼낸 menuId: " + menuId);
+            const menuName = CartApi.getInstance().getMenu(menuId).menuName;
 
             const status = cart.status;
             console.log("innerHTML에 사용될 cartList에서 꺼낸 status: " + status);
@@ -153,9 +193,8 @@ class CartService {
             const cartItem = `
                 <div class="user-cartlist-title">
                     <div class="cart-carttitle cart-cart-id">${cartId}</div>
-                    <div class="cart-carttitle cart-user-id">${userId}</div>
-                    <div class="cart-carttitle cart-cafe-id">${cafeId}</div>
-                    <div class="cart-carttitle cart-menu-id">${menuId}</div>
+                    <div class="cart-carttitle cart-cafe-id">${cafeName}</div>
+                    <div class="cart-carttitle cart-menu-id">${menuName}</div>
                     <div class="cart-carttitle cart-status">${status}</div>
                     <div class="cart-carttitle cart-shot">${shot}</div>
                     <div class="cart-carttitle cart-whip">${whip}</div>
