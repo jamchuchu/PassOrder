@@ -28,8 +28,7 @@ public class LikeApi {
     @ParamsAspect
     @PostMapping("/like")
     public ResponseEntity<? extends CMRespDto<?>> like (@RequestBody LikeMst likeMst , @AuthenticationPrincipal PrincipalDetails principal){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;
+        int userId = principal.getUser().getUserId();
         likeService.createLikeMst(userId, likeMst.getMenuId(), likeMst.getCafeId());
         return ResponseEntity
                 .ok()
@@ -39,8 +38,7 @@ public class LikeApi {
     @ParamsAspect
     @GetMapping("/like-list/{cafeId}/{start}")
     public ResponseEntity<? extends CMRespDto<List<LikeMst>>> likeList(@PathVariable int cafeId, @PathVariable int start, @AuthenticationPrincipal PrincipalDetails principal){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;
+        int userId = principal.getUser().getUserId();
         List<LikeMst> likeMstList = likeService.createLikeList(userId, cafeId, start);
 
         return ResponseEntity
@@ -52,8 +50,7 @@ public class LikeApi {
     @ParamsAspect
     @GetMapping("/like-list/{cafeId}")
     public ResponseEntity<? extends CMRespDto<List<LikeMst>>> likeListAll(@PathVariable int cafeId, @AuthenticationPrincipal PrincipalDetails principal){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;
+        int userId = principal.getUser().getUserId();
         List<LikeMst> likeMstList = likeService.createLikeAllList(userId, cafeId);
 
         return ResponseEntity

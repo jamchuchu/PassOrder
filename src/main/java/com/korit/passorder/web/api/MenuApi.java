@@ -74,8 +74,7 @@ public class MenuApi {
 
     @GetMapping("admin/{category}")
     public ResponseEntity<?> getMenuByCategoryForAdmin(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable String category){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;
+        int userId = principal.getUser().getUserId();
         int cafeId = cafeService.getCafeIdByUserId(userId);
         List<MenuMst> menuMstList = menuService.getMenuByCategory(cafeId ,category);
 
@@ -92,8 +91,8 @@ public class MenuApi {
 
     @GetMapping("/admin/cafeId")
     public ResponseEntity<?> getMenuByCafeIdForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
+        int userId = principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
         List<MenuMst> menuMstList = menuService.getMenuByCafeId(cafeId);
         return  ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", menuMstList));
     }
@@ -106,8 +105,8 @@ public class MenuApi {
 
     @GetMapping("/admin/category")
     public ResponseEntity<?> getCategoriesForAdmin(@AuthenticationPrincipal PrincipalDetails principal){
-//        int userId = principal.getUser().getUserId();
-        int userId = 16;        int cafeId = cafeService.getCafeIdByUserId(userId);
+        int userId = principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
         List<String> category = menuService.getCategoriesByCafeId(cafeId);
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "ok", category));
     }
