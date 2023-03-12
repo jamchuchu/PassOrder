@@ -12,9 +12,4 @@ public class CartController {
     public String cartUser() {
         return "cart/cart";
     }
-
-//    @GetMapping("/admin")
-//    public String mypageAdmin() {
-//        return "mypage/adminMypage";
-//    }
 }

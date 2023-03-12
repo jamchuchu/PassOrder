@@ -1,7 +1,6 @@
 window.onload = () => {
     AdminMypageService.getInstance().showCafeInfoPageLoad();
     AdminMypageHeaderEvent.getInstance().addLogoutButtonOnclickEvent();
-    AdminMypageHeaderEvent.getInstance().addAdminMypageOnclickEvent();
     AdminMypageHeaderEvent.getInstance().addLogoOnclickEvent();
     AdminMypageHeaderEvent.getInstance().addCartOnclickEvent();
     AdminMypageHeaderEvent.getInstance().addMypageOnclickEvent();
@@ -161,16 +160,6 @@ class AdminMypageHeaderEvent {
         }
     }
 
-    addAdminMypageOnclickEvent() {
-        const adminMypageButton = document.querySelector(".logout-submit");
-        const loginPrincipalData = PrincipalApi.getInstance().getPrincipal();
-
-        adminMypageButton.onclick = () => {
-            if(loginPrincipalData !== null) {
-                location.href = '/mypage/admin';
-            }
-        }
-    }
 
     addLogoutButtonOnclickEvent() {
         const LogOutSubmitButton = document.querySelector('.logout-submit');

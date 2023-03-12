@@ -1,4 +1,9 @@
 window.onload = () => {
+    SaleManageHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    SaleManageHeaderEvent.getInstance().addMypageOnclickEvent();
+    SaleManageHeaderEvent.getInstance().addCartOnclickEvent();
+    SaleManageHeaderEvent.getInstance().addLogoOnclickEvent();
+
     ManageEvent.getInstance().getSelectedDateRange();
 }
 
@@ -179,4 +184,47 @@ class Time {
       this.endDate = endDate;
 
   }
+}
+
+class SaleManageHeaderEvent {
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new SaleManageHeaderEvent();
+        }
+
+        return this.#instance;
+    }
+
+    addCafeMenuOnclickEvent() {
+        const cafeMenuButton = document.querySelectorAll(".menu-container-nav")[0];
+
+        cafeMenuButton.onclick = () => {
+            location.href = '/menu/admin';
+        }
+    }
+    
+    addMypageOnclickEvent() {
+        const mypageMenuButton = document.querySelectorAll(".menu-container-nav")[1];
+
+        mypageMenuButton.onclick = () => {
+            location.href = '/mypage/admin';
+        }
+    }
+
+    addCartOnclickEvent() {
+        const cartMenuButton = document.querySelectorAll(".menu-container-nav")[2];
+
+        cartMenuButton.onclick = () => {
+            location.href = '/mypage/admin-order-management'
+        }
+    }
+
+    addLogoOnclickEvent() {
+        const logoMenuButton = document.querySelector(".logo-button");
+
+        logoMenuButton.onclick = () => {
+            location.href = '/login-success';
+        }
+    }
 }

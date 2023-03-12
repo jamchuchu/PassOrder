@@ -118,7 +118,7 @@ class indexSuccessEvent {
             if(loginPrincipalData.user.roleId == 2) {
                 location.href = '/cart/user';
             } else if(loginPrincipalData.user.roleId == 1) {
-                location.href = '/mypage/admin';
+                location.href = '/mypage/admin-order-management';
             }
         }
     }
