@@ -7,6 +7,7 @@ import com.korit.passorder.entity.OrderMst;
 import com.korit.passorder.respository.CartRepository;
 import com.korit.passorder.respository.OrderRepository;
 import com.korit.passorder.security.PrincipalDetails;
+import com.korit.passorder.service.CafeService;
 import com.korit.passorder.service.CartService;
 import com.korit.passorder.service.OrderService;
 import com.korit.passorder.web.dto.CMRespDto;
@@ -18,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -30,6 +33,9 @@ public class OrderApi {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    CafeService cafeService;
 
     @Autowired
     OrderRepository orderRepository;
@@ -114,4 +120,25 @@ public class OrderApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Create Order Successfully", orderList));
     }
+
+    @GetMapping("")
+    public ResponseEntity<CMRespDto<?>> getOrderbyAdmin(@AuthenticationPrincipal PrincipalDetails principal, @RequestParam String startDate, @RequestParam String endDate) {
+        int userId =  principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<OrderMst> orderList= orderService.getOrderbyAdmin(cafeId, startDate, endDate);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Get OrderDtlList Successfully", orderList));
+    }
+
+    @GetMapping("/groupUser")
+    public ResponseEntity<CMRespDto<?>> getOrderGroupUserbyAdmin(@AuthenticationPrincipal PrincipalDetails principal, @RequestParam String startDate, @RequestParam String endDate) {
+        int userId =  principal.getUser().getUserId();
+        int cafeId = cafeService.getCafeIdByUserId(userId);
+        List<OrderMst> orderList= orderService.getOrderGroupUserbyAdmin(cafeId, startDate, endDate);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Get OrderDtlList Successfully", orderList));
+    }
+
 }

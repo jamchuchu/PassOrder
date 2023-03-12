@@ -27,4 +27,11 @@ public class MypageController {
     public String modifyUser() {
         return "modify/userModify";
     }
+
+    @GetMapping("/sale-manage")
+    public String saleManage() {
+        return "mypage/saleManage";
+    }
+
+
 }
