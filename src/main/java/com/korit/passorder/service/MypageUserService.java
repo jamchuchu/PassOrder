@@ -34,6 +34,7 @@ public class MypageUserService {
         return mypageRepository.couponCountUpdate(userId, cafeId, couponCount);
     }
 
+
     public CouponMst getCouponMst(int userId, int cafeId){
 
         return mypageRepository.getCouponStatus(userId, cafeId);
