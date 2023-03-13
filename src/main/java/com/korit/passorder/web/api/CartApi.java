@@ -8,6 +8,7 @@ import com.korit.passorder.service.CartService;
 import com.korit.passorder.service.MenuService;
 import com.korit.passorder.web.dto.CMRespDto;
 import com.korit.passorder.web.dto.CartReqDto;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.List;
 
+@Api(tags = {"user 장바구니관리 Api"})
 @RestController
 @RequestMapping("/api/cart")
 public class CartApi {

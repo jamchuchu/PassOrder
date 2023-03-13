@@ -6,6 +6,7 @@ import com.korit.passorder.entity.CafeMst;
 import com.korit.passorder.entity.UserMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.AccountService;
+import com.korit.passorder.service.MypageUserService;
 import com.korit.passorder.web.dto.CMRespDto;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,16 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @Slf4j
-@Api(tags = {"Account Rest API Controller"})
+@Api(tags = {"계정 관리 Api"})
 @RestController
 @RequestMapping("/api/account")
 public class AccountApi {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private MypageUserService mypageUserService;
 
 
     @ApiOperation(value = "회원가입", notes = "회원가입 요청 메소드")
@@ -38,6 +42,8 @@ public class AccountApi {
         accountService.compareToPassword(userMst.getPassword(), userMst.getRepassword());
 
         UserMst user = accountService.registerUser(userMst);
+        int cafeId = 26;
+        mypageUserService.createCouponMst(user.getUserId(), cafeId);
 
         return ResponseEntity
                 .created(URI.create("/api/account/user/" + user.getUserId()))

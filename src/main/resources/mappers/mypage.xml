@@ -49,6 +49,11 @@
             user_id = #{userId} and cafe_id = #{cafeId}
     </update>
 
+    <insert id="createCouponMst">
+        insert into couponMst
+        values (0, #{userId}, #{cafeId}, 0);
+    </insert>
+
 
 
 </mapper>

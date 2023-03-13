@@ -22,8 +22,11 @@ public class MypageUserService {
     }
 
     public int getTotalPrice(int userId, int cafeId){
-
-        return mypageRepository.selectTotalPrice(userId, cafeId);
+        int totalPrice = 0;
+        if(mypageRepository.selectTotalPrice(userId, cafeId)!= null) {
+            totalPrice = mypageRepository.selectTotalPrice(userId, cafeId);
+        }
+        return totalPrice;
     }
 
     public int updateCouponCount(int userId, int cafeId, int couponCount) {
@@ -34,6 +37,10 @@ public class MypageUserService {
     public CouponMst getCouponMst(int userId, int cafeId){
 
         return mypageRepository.getCouponStatus(userId, cafeId);
+    }
+
+    public int createCouponMst(int userId, int cafeId){
+        return mypageRepository.createCouponMst(userId, cafeId);
     }
 
 

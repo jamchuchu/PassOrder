@@ -187,6 +187,8 @@ class UserMenuService {
 
     viewLikeMenu(start){
       const likeFull = document.querySelectorAll(".drink-box");
+      var errorMessage = document.querySelector(".error-message");
+
       if(UserMenuApi.getInstance().getPrincipal() == null){
         likeFull.forEach(box => {
           box.style.display = "none";
@@ -198,10 +200,21 @@ class UserMenuService {
       const likeMenu = UserMenuApi.getInstance().getLikeMenu(start);
 
       const likeName = document.querySelectorAll(".like-name");
+      if(likeMenu.length == 0 && start == 0){
+        likeFull.forEach(box => {
+          box.style.display = "none";
+        })
+        errorMessage.innerText = "즐겨찾기 한 메뉴가 없습니다."
+        errorMessage.hidden = false;
+        return;
+      }
+
       if(likeMenu.length == 0){
         alert("마지막 페이지 입니다.");
         return;
       }else{
+        errorMessage.hidden = true;
+
         likeFull.forEach(box => {
           box.style.display = "none";
         })

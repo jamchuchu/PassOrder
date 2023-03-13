@@ -15,4 +15,6 @@ public interface MypageRepository {
     public CouponMst getCouponStatus(int userId, int cafeId);
 
     public List<OrderMst> getUserOrderList (int userId, int cafeId);
+
+    public int createCouponMst (int userId, int cafeId);
 }

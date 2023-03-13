@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Api(tags = {"MypageUser Rest API Controller"})
+@Api(tags = {"user mypage 정보관리 Api"})
 @RestController
 @RequestMapping("/api/mypage-user")
 public class MypageUserApi {

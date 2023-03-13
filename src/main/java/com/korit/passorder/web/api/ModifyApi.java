@@ -7,6 +7,7 @@ import com.korit.passorder.entity.UserMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.ModifyAdminService;
 import com.korit.passorder.web.dto.CMRespDto;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@Api(tags = {"계정 정보수정 Api"})
 @RestController
 @RequestMapping("/api/admin-account")
 public class ModifyApi {

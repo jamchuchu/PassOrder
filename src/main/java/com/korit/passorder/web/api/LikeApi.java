@@ -6,6 +6,7 @@ import com.korit.passorder.entity.LikeMst;
 import com.korit.passorder.security.PrincipalDetails;
 import com.korit.passorder.service.LikeService;
 import com.korit.passorder.web.dto.CMRespDto;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(tags = {"유저 즐겨찾기 관리 Api"})
 @Slf4j
 @RestController
 @RequestMapping("/api")

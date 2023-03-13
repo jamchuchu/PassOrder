@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
-@Api(tags = {"Rest API Controller For Order"})
+@Api(tags = {"주문관리 Api"})
 @RestController
 @RequestMapping("/api/order")
 public class OrderApi {
