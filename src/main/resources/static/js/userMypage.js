@@ -124,6 +124,47 @@ class UserOrderApi {
 
         return responseData;
     }
+
+    getCafe(cafeId){
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/cafe/cafeId/${cafeId}`,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+                console.log(responseData);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return responseData;
+    }
+
+    
+    getMenu(menuId){
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/menu/menuId/${menuId}`,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+                console.log(responseData);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return responseData;
+    }
 }
 
 
@@ -327,20 +368,22 @@ class UserMypageEvent {
                 <div class="user-orderlist-box">
                 <div id="user-orderlist-id" class="user-orderlist-title">
                     <div class="order-ordertitle title-order">주문 번호</div>
-                    <div class="order-ordertitle title-order">카페 번호</div>
-                    <div class="order-ordertitle title-order">사용자 번호</div>
+                    <div class="order-ordertitle title-order">카페명</div>
+                    <div class="order-ordertitle title-order">사용자이름</div>
                     <div class="order-ordertitle title-order">주문 가격</div>
-                    <div class="order-ordertitle title-order">결제 완료</div>
+                    <div class="order-ordertitle title-order">결제 </div>
                 </div>
             `;
 
             for (let i = 0; i < responseData.length; i++) {
                 const { orderId, cafeId, userId, totalPrice } = responseData[i];
+                const cafeName = UserOrderApi.getInstance().getCafe(cafeId).cafeName;
+                const username = PrincipalApi.getInstance().getPrincipal().username;
                 orderListHtml += `
                 <div class="user-orderlist-title">
                     <div class="order-ordertitle order-order-id">${orderId}</div>
-                    <div class="order-ordertitle order-cafe-id">${cafeId}</div>
-                    <div class="order-ordertitle order-user-id">${userId}</div>
+                    <div class="order-ordertitle order-cafe-id">${cafeName}</div>
+                    <div class="order-ordertitle order-user-id">${username}</div>
                     <div class="order-ordertitle order-total-price">${totalPrice}</div>
                     <div class="order-ordertitle order-complete">1</div>
                 </div>
