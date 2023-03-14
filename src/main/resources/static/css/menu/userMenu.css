@@ -1,0 +1,396 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.sub-img-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    
+    background-image: url(/static/images/leaves-g9521d133f_1920.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 600px;
+}
+
+.main-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 50px;
+}
+  
+.main-title-container span {
+    color: #ffffff;
+    font-size: 20px;
+
+    padding-bottom: 10px;
+}
+  
+.main-title-container h1 {
+    margin-top: 10px;
+  
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.recommend-container {
+    display: flex;
+    width: 100%;
+
+    padding-bottom: 50px;
+}
+
+.error-message{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* 사이드바 css */
+
+#quickmenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+	position: sticky;
+	width: 450px;
+	height: 300px;
+    top: 250px;
+	left: 100px;
+	background-color: #ebebeb;
+
+    border: 1px solid #ffffff;
+
+    border-radius: 12px;
+
+}
+/* 사이드바 css */
+
+.quick-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 400px;
+    height: 280px;
+}
+
+.left-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 45px;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    border-radius: 0;
+
+    margin: 7px 0 7px 0;
+
+    color: rgb(0, 0, 0);
+    background-color: white;
+
+}
+
+.left-button:hover {
+
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+
+    border-radius: 0;
+
+
+    margin: 7px 0 7px 0;
+
+    background-color: #002f6c;
+}
+
+
+
+input[type=radio]:checked + .left-button {
+    background-color: #002f6c;
+    border: 1px solid #002f6c;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+.recommend-right-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 100px;
+    width: 100%;
+
+    margin-top: 50px;
+}
+
+.recommend-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1200px;
+    height: 50px;
+
+    border: 1px solid #ebebeb;
+}
+
+.recommend-title h1 {
+    font-size: 22px;
+    text-align: center;
+}
+
+.recommend-right-products {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 1200px;
+    height: 500px;
+
+    margin-top: 25px;
+
+    padding: 0 15px 0 15px;
+
+    border: 1px solid #ebebeb;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+.recommend-btn {
+    width: 50px;
+    height: 50px;
+
+    box-sizing: border-box;
+}
+
+.fa-angles-left {
+    font-size: 22px;
+}
+
+.fa-angles-right {
+    font-size: 22px;
+}
+
+.drink-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+
+    width: 400px;
+    height: 500px;
+
+    padding-top: 30px;
+
+    overflow: hidden;
+}
+
+.recom-drink-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 400px;
+
+    overflow: hidden;
+}
+
+.recom-drink-img img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 350px;
+    height: 400px;
+}
+
+.recom-drink-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 350px;
+    height: 100px;
+}
+
+.recom-drink-name p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.main-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 1400px;
+
+}
+
+.main-menu-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 1200px;
+
+    margin-top: 25px;
+
+    border: 1px solid #ebebeb;
+    box-sizing: content-box;
+
+    overflow: hidden;
+}
+
+.main-menu-drink-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 1200px;
+}
+
+.main-menu-drink-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 300px;
+    height: 500px;  
+
+
+    margin-bottom: 40px;
+}
+
+.main-menu-drink-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 400px;
+
+
+    background-color: darkorange;
+}
+
+.main-menu-drink-img img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 400px;
+}
+
+.main-menu-drink-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 100px;
+}
+
+.main-menu-drink-name p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.cart-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 50px;
+}
+
+.fa-heart-circle-plus {
+    font-size: 20px;
+}
+
+.favorite-button i {
+    font-size: 20px;
+
+    width: 300px;
+}
+
+.favorite-button i:hover {
+    font-size: 20px;
+    color: red;
+}
+
+.cliked-like-button{
+    background-color: white;
+    font-size: 20px;
+    color: red;
+}
+
+.normal-button{
+    background-color: white;
+    font-size: 20px;
+    color: black;
+}
+
+
+
+.main-menu-drink-box button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 30px;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.add-load-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    width: 100%;
+    height: 100px;
+
+}
+
+
+.add-button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+    height: 35px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}

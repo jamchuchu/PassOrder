@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korit.passorder.respository.OrderRepository">
+
+    <insert id="createNewOrder"
+            parameterType="com.korit.passorder.entity.OrderMst"
+            useGeneratedKeys="true"
+            keyProperty="orderId">
+
+        insert into orderMst
+        values (0, #{cafeId}, #{userId}, #{orderTime}, #{totalPrice}, 0)
+    </insert>
+
+    <insert id="createNewOrderDtl"
+            parameterType="com.korit.passorder.entity.OrderDtl"
+            useGeneratedKeys="true"
+            keyProperty="orderDtlId">
+
+        insert into orderDtl
+        values (0, #{orderId}, #{menuId}, #{status}, #{shot}, #{whip}, #{cartId})
+    </insert>
+
+    <select id="getOrderDtlList"
+            resultType="com.korit.passorder.entity.OrderDtl">
+        select
+            order_dtl_id as orderDtlId,
+            order_id as orderId,
+            menu_id as menuId,
+            status,
+            shot,
+            whip,
+            cart_id as cartId
+        from
+            orderDtl
+        where
+            order_id = #{orderId}
+    </select>
+
+    <select id="getOrderList"
+            resultType="com.korit.passorder.entity.OrderMst">
+        select
+            order_id as orderId,
+            cafe_id as cafeId,
+            user_id as userId,
+            order_time as orderTime,
+            total_price as totalPrice,
+            complete
+        from
+            orderMst
+        where
+            user_id = #{userId} and cafe_id = #{cafeId}
+    </select>
+
+    <select id="getOrderListNotComplete"
+            parameterType="com.korit.passorder.entity.OrderMst"
+            resultType="com.korit.passorder.entity.OrderMst">
+        select
+            order_id as orderId,
+            cafe_id as cafeId,
+            user_id as userId,
+            order_time as orderTime,
+            total_price as totalPrice,
+            complete
+        from
+            orderMst
+        where
+            complete = 0
+    </select>
+
+    <select id="findOrderByOrderId"
+            resultType="com.korit.passorder.entity.OrderMst">
+        select
+            order_id as orderId,
+            cafe_id as cafeId,
+            user_id as userId,
+            order_time as orderTime,
+            total_price as totalPrice,
+            complete
+        from
+            orderMst
+        where
+            order_id = #{orderId}
+    </select>
+
+    <update id="completeStatus"
+            parameterType="com.korit.passorder.entity.OrderMst">
+        update orderMst
+        set
+            complete = 1
+        where
+            order_id = #{orderId}
+    </update>
+
+    <select id="getOrderbyAdmin"  resultType="com.korit.passorder.entity.OrderMst">
+        select
+        order_id as orderId,
+        cafe_id as cafeId,
+        user_id as userId,
+        order_time as orderTime,
+        total_price as totalPrice
+        from orderMst
+        where order_time between #{start} and DATE_ADD(#{end}, INTERVAL 1 DAY) and complete = 1
+    </select>
+
+    <select id="getOrderGroupUserbyAdmin"  resultType="com.korit.passorder.entity.OrderMst">
+        select
+        cafe_id as cafeId,
+        user_id as userId,
+        sum(total_price) as totalPrice
+        from orderMst
+        where order_time between #{start} and DATE_ADD(#{end}, INTERVAL 1 DAY) and complete = 1
+        group by user_Id
+    </select>
+
+</mapper>

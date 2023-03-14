@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/menu/userMenu.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/menu/userMenupopup.css">
+
+    <title>패스오더</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <header class="header-container">
+        <div class="sns-container">
+          <button class="sns-button" disabled>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-facebook"></i>
+          </button>
+        </div>
+        <div class="logo-container">
+            <h1 class="brand-logo"><a href="javascript:void(0);" class="logo-button">PASSORDER</a></h1>
+        </div>
+        <ul class="menu-container">
+            <li><a href="javascript:void(0);" class="menu-container-nav">카페메뉴</a></li>
+            <li><a href="javascript:void(0);" class="menu-container-nav">마이페이지</a></li>
+            <li><a href="javascript:void(0);" class="menu-container-nav">장바구니</a></li>
+        </ul>
+      </header>
+
+      
+      <main class="main-container">
+        <div class="sub-img-area">
+          <div class="main-title-container">
+              <span>ALWAYS BESIDE YOU, PASSORDER MENU</span>
+              <h1>한잔의 커피 그 이상의 감동을 경험하세요.</h1>
+          </div>
+        </div>
+
+
+        <!-- recommend menu -->
+        <div class="recommend-container">
+          <div id="quickmenu">
+            <div class="quick-group">
+              <button type="button" class="left-button">전체메뉴</button>
+              <button type="button" class="left-button">커피</button>
+              <button type="button" class="left-button">음료</button>
+              <button type="button" class="left-button">TEA</button>
+            </div>
+          </div>  
+
+          <div class="recommend-right-area"> <!-- recommend-content -->
+            <div class="recommend-title">
+              <h1>PASSORDER 추천 상품</h1>
+            </div>
+            
+            
+            <div class="recommend-right-products">
+              <button type="button" class="recommend-btn recommend-left-button"><i class="fa-solid fa-angles-left"></i></button>
+              <p class="error-message" hidden>로그인 후 사용하실 수 있습니다.</p>
+              <div class="drink-box">
+                <div class="recom-drink-img">
+                  <button type="button" class="like-menu"><img src="/static/images/음료1.PNG" alt=""></button>
+                </div>
+                <div class="recom-drink-name">
+                  <p class="like-name">HOT 생딸기 블루밍 그린티</p>
+                </div>
+              </div>
+              <div class="drink-box">
+                <div class="recom-drink-img">
+                  <button type="button" class="like-menu"><img src="/static/images/음료1.PNG" alt=""></button>
+                </div>
+                <div class="recom-drink-name">
+                  <p class="like-name">HOT 생딸기 블루밍 그린티</p>
+                </div>
+              </div>
+              <div class="drink-box">
+                <div class="recom-drink-img">
+                  <button type="button" class="like-menu"><img src="/static/images/음료1.PNG" alt=""></button>
+                </div>
+                <div class="recom-drink-name">
+                  <p class="like-name">HOT 생딸기 블루밍 그린티</p>
+                </div>
+              </div>
+              <button type="button" class="recommend-btn recommend-right-button"><i class="fa-solid fa-angles-right"></i></button>
+            </div>
+            <!-- main menu -->
+            <div class="main-menu-container">
+              <div class="main-menu-content">
+                <div class="main-menu-drink-group">
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="main-menu-drink-box">
+                    <div class="main-menu-drink-img"><img src="/static/images/음료1.PNG" alt=""></div>
+                    <div class="main-menu-drink-name"><p>HOT 생딸기 블루밍 그린티</p></div>
+                    <div class="cart-button-group">
+                      <button type="button" class="cart-button">장바구니</button>
+                      <button type="button" class="cart-button favorite-button"><i class="fa-solid fa-heart-circle-plus"></i></button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="add-load-page">
+                <button type="button" class="add-button">메뉴 더보기<i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      
+    <div class="popup-container"> 
+      <div class="popup-wrap">
+        <div class="popup">
+          <div class="popup-head">
+              <h1 class="head-title">메뉴 등록</h1>
+          </div>
+          <div class="popup-body">
+            <div class="body-left-content">
+              <div class="register-image-container">
+                <img src="/static/images/no-image.jpg" alt="">
+              </div>
+            </div>
+            <div class="body-right-content">
+              <form action="" method="post">
+                    <div class="menu-name-box">
+                      <div class="option-label">
+                        <label for="menuName" class="option-label">메뉴명</label>
+                      </div>
+                      <p class="menuName">딸기라떼라떼</p>
+                    </div>
+                    <div class="menu-price-box">
+                      <div class="option-label">
+                        <label for="menu-price" class="option-label">메뉴가격</label>
+                      </div>
+                      <div>
+                        <p class="menu-price">5000</p>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">상태</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="hot-radio" name="hotAndice" value="hot">
+                          <label for="hot-radio" class="status-button hot-button">HOT</label>
+                          <input type="radio" id="ice-radio" name="hotAndice" value="ice">
+                          <label for="ice-radio" class="status-button ice-button">ICE</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">샷 추가</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="shot-none-radio" name="shotStatus" value=false>
+                          <label for="shot-none-radio" class="shot-button shot-none-button">없음</label>
+                          <input type="radio" id="shot-add-radio" name="shotStatus" value="true">
+                          <label for="shot-add-radio" class="shot-button shot-add-button">추가</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="menu-option-box">
+                      <div class="option-label">
+                        <label for="menuStatus">휘핑 추가</label>
+                      </div>
+                      <div class="menu-button-input">
+                        <div class="menu-button-area">
+                          <input type="radio" id="whip-none-radio" name="whipStatus" value=false>
+                          <label for="whip-none-radio" class="whip-button whip-none-button">없음</label>
+                          <input type="radio" id="whip-add-radio" name="whipStatus" value=true>
+                          <label for="whip-add-radio" class="whip-button whip-add-button">추가</label>
+                        </div>
+                        <div class="add-menu-price">
+                          <p class="add-menu-plus-price">500원</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </form>
+            </div>
+          </div>
+            <div class="button-group-footer">
+              <button type="button" class="footer-button close-button">취소</button>
+              <button type="button" class="footer-button save-button">장바구니</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/static/js/userMenu.js"></script>
+    <script type="text/javascript"> 
+
+    </script>
+  </body>
+</html>

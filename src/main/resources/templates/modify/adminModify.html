@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스오더</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/modify/adminModify.css" />
+</head>
+
+<body>
+    <div id="container">
+      <header class="header-container">
+        <div class="sns-container">
+            <button class="sns-button" disabled>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-facebook"></i>
+            </button>
+          </div>
+          <div class="logo-container">
+              <h1 class="brand-logo"><a href="javascript:void(0);" class="logo-button">PASSORDER</a></h1>
+          </div>
+          <ul class="menu-container">
+              <li><a href="javascript:void(0);" class="menu-container-nav">카페메뉴</a></li>
+              <li><a href="javascript:void(0);" class="menu-container-nav">마이페이지</a></li>
+              <li><a href="javascript:void(0);" class="menu-container-nav">장바구니</a></li>
+          </ul>
+      </header>
+        
+        <main class="main-container">
+          <div class="sub-img-area">
+            <div class="main-title-container">
+              <span>ALWAYS BESIDE YOU, 회원정보 수정 페이지</span>
+              <h1>늘 당신 곁에, 패스오더는 항상 함께합니다.</h1>
+            </div>
+          </div>
+
+          <div class ="register-bigbox">
+            <div class="register-container">
+              <div class="modify-title">
+                <p>회원정보 수정</p>
+              </div>
+
+              <div class="register-group">
+                <label for="register-username">아이디</label>
+                <div class="input-group">
+                  <p class="register-inputs">rorndksk123</p>
+                  
+                  <div class="register-error"></div>
+                </div>
+              </div>
+
+  
+              <div class="register-group">
+                <label for="register-name">성명</label>
+                <div class="input-group">
+                  <p class="register-inputs">박창우</p>
+
+                  <div class="register-error"></div>
+                </div>
+              </div>
+
+              <div class="register-group">
+                <label for="register-password">새 비밀번호</label>
+                <div class="input-group">
+                  <input type="password" id="modify-password" class="register-inputs" name="password" placeholder="새로운 비밀번호" required="required"/>
+                  <div class="register-error"></div>
+                </div>
+              </div>
+  
+              <div class="register-group">
+                <label for="register-repassword">새 비밀번호 확인</label>
+                <div class="input-group">
+                  <input type="password" id="modify-repassword" class="register-inputs" name="repassword" placeholder="비밀번호 확인" required="required"/>
+                  <div class="register-error"></div>
+                </div>
+              </div>
+
+              <div class="register-group">
+                <label for="register-email">이메일</label>
+                <div class="input-group">
+                  <p class="register-inputs">rorndksk123@naver.com</p>
+                  
+                  <div class="register-error"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="register-admin-container">
+              <h1 class="register-title">매장 정보 수정</h1>
+              
+              <div class="register-content">
+                     
+                <div class="register-group">
+                  <label for="register-strorename">지점명</label>
+                  <div class="input-group">
+                    <input type="text" id="modify-storename" name="cafeName" class="admin-register-inputs" placeholder="새로운 지점명" required="required" />
+                    <div class="admin-error"></div>
+                  </div>
+                </div>
+    
+                <div class="register-group">
+                  <label for="register-address">주소</label>
+                  <div class="input-group">
+                    <input type="address" id="modify-address" name="address" class="admin-register-inputs" placeholder="새로운 주소" required="required"/>
+                    <div class="admin-error"></div>
+                  </div>
+                </div>               
+    
+                <div class="register-group">
+                  <label for="register-tel">전화번호</label>
+                  <div class="input-group">
+                    <input type="tel" id="modify-tel" name="phone" class="admin-register-inputs"placeholder="새로운 전화번호" required="required" />
+                    <div class="admin-error"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="register-submit">수정하기</button>
+          </div>
+        </main>
+    </div>
+    <script src="/static/js/component/header.js"></script>
+    <script src="/static/js/adminModify.js"></script>
+</body>
+
+</html>

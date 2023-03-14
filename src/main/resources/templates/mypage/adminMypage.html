@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스오더</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/mypage/adminMypage.css" />
+</head>
+
+<body>
+    <div id="container">
+        <header class="header-container">
+            <div class="sns-container">
+                <button class="sns-button" disabled>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+              </div>
+              <div class="logo-container">
+                  <h1 class="brand-logo"><a href="javascript:void(0);" class="logo-button">PASSORDER</a></h1>
+              </div>
+              <ul class="menu-container">
+                  <li><a href="javascript:void(0);" class="menu-container-nav">카페메뉴</a></li>
+                  <li><a href="javascript:void(0);" class="menu-container-nav">마이페이지</a></li>
+                  <li><a href="javascript:void(0);" class="menu-container-nav">장바구니</a></li>
+              </ul>
+        </header>
+    
+        
+        <main class="main-container">
+            <div class="sub-img-area">
+                <div class="main-title-container">
+                    <span>ALWAYS BESIDE YOU, 관리자 마이페이지</span>
+                    <h1>늘 당신 곁에, 패스오더는 항상 함께합니다.</h1>
+                </div>
+            </div>
+
+
+            <!----------여기서부터 html 추가하시면 됩니다.------------------------->
+            <div class="mypage-admin">
+                <div class="admin-ui-container">
+                    <div class="admin-ui">
+                        <div class="admin-button"><a href="http://localhost:8000/mypage/admin-order-management">주문관리</a></div>
+                        <div class="admin-button"><a href="http://localhost:8000/menu/admin">메뉴관리</a></div>
+                        <div class="admin-button"><a href="http://localhost:8000/mypage/sale-manage">매출관리</a></div>
+                        <div class="admin-button"><a href="http://localhost:8000/mypage/admin-modify">관리자 / 매장<br>정보수정</a></div>
+                    </div>
+                    <div class="admin-dtl-container">
+                        <div class="admin-dtl-box">
+                            <div class="admin-title"><h1>관리자 기본 정보</h1></div>
+                            <div class="admin-base-box">
+                                <div class="welcome-dtl">
+                                    <p>박창우 사장님 매장</p>
+                                </div>
+                                <div class="store-dtl-box">
+                                    <div class="store-dtl">
+                                        <p class="store-subtitle">지점명</p><p>패스오더 부산대학교 정문점</p>
+                                    </div>
+                                    <div class="store-dtl">
+                                        <p class="store-subtitle">주소</p><p>부산광역시 금정구 부산대학로 63번길 2</p>
+                                    </div>
+                                    <div class="store-dtl">
+                                        <p class="store-subtitle">가게 번호</p><p>010-0000-0000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="admin-button-group">
+                                <button type="button" class="logout-submit" onclick="location.href='/logout'">로그아웃</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/component/header.js"></script>
+    <script src="/static/js/adminMypage.js"></script>
+</body>
+
+</html>
