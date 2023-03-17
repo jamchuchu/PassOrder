@@ -5,6 +5,7 @@ window.onload = () => {
     AdminMypageHeaderEvent.getInstance().addCartOnclickEvent();
     AdminMypageHeaderEvent.getInstance().addMypageOnclickEvent();
     AdminMypageHeaderEvent.getInstance().addCafeMenuOnclickEvent();
+    AdminMypageHeaderEvent.getInstance().addMypageControlButton();
 }
 
 class PrincipalApi {
@@ -169,6 +170,30 @@ class AdminMypageHeaderEvent {
             if(loginPrincipalData !== null) {
                 location.href = '/logout';
             }
+        }
+    }
+
+    addMypageControlButton() {
+        const adminOrderManageButton = document.querySelectorAll(".admin-button")[0];
+        const adminMenuManageButton = document.querySelectorAll(".admin-button")[1];
+        const adminSaleManageButton = document.querySelectorAll(".admin-button")[2];
+        const adminModifyButton = document.querySelectorAll(".admin-button")[3];
+
+
+        adminOrderManageButton.onclick = () => {
+            location.href = '/mypage/admin-order-management';
+        }
+
+        adminMenuManageButton.onclick = () => {
+            location.href = '/menu/admin';
+        }
+
+        adminSaleManageButton.onclick = () => {
+            location.href = '/mypage/sale-manage';
+        }
+
+        adminModifyButton.onclick = () => {
+            location.href = '/mypage/admin-modify';
         }
     }
 }
