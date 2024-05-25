@@ -6,9 +6,10 @@
 ![image](https://github.com/jamchuchu/PassOrder/assets/111384882/21c4730b-823c-44f1-9832-25ecbc904e9b)
 
 
-## 프로젝트 기간
+## 프로젝트 기간 및 인원
 
 2022년 10월 ~ 2023년 3월
+3명
 
 ## 링크
 
